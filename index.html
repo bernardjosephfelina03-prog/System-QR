@@ -1,0 +1,2945 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>QR Event Attendance System</title>
+
+<!-- QR CODE GENERATOR -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+<!-- QR CODE SCANNER -->
+<script src="https://unpkg.com/html5-qrcode"></script>
+
+<style>
+
+/* =====================================================
+   GENERAL
+===================================================== */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #fff5f5;
+    color: #333;
+}
+
+button {
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+input,
+select {
+    font-family: inherit;
+}
+
+
+/* =====================================================
+   COLORS
+===================================================== */
+
+:root {
+    --red: #d9534f;
+    --dark-red: #b52b27;
+    --light-red: #fff0f0;
+    --lighter-red: #fff7f7;
+    --border-red: #f2b8b5;
+    --green: #28a745;
+    --gray: #666;
+}
+
+
+/* =====================================================
+   LOGIN PAGE
+===================================================== */
+
+#loginPage {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #fff,
+            #ffeaea
+        );
+}
+
+.login-box {
+    width: 100%;
+    max-width: 420px;
+
+    background: white;
+
+    padding: 35px;
+
+    border-radius: 20px;
+
+    box-shadow:
+        0 10px 35px rgba(0,0,0,.12);
+
+    text-align: center;
+}
+
+.logo {
+    width: 75px;
+    height: 75px;
+
+    margin: auto;
+
+    border-radius: 50%;
+
+    background: var(--light-red);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 35px;
+}
+
+.login-box h1 {
+    color: var(--dark-red);
+    margin-bottom: 5px;
+}
+
+.login-box p {
+    color: var(--gray);
+}
+
+.login-box input {
+    width: 100%;
+
+    padding: 13px;
+
+    margin: 7px 0;
+
+    border: 1px solid #ddd;
+
+    border-radius: 9px;
+
+    outline: none;
+}
+
+.login-box input:focus {
+    border-color: var(--red);
+}
+
+.login-btn {
+    width: 100%;
+
+    background: var(--red);
+    color: white;
+
+    padding: 13px;
+
+    margin-top: 10px;
+
+    border-radius: 9px;
+}
+
+.create-btn {
+    background: white;
+    color: var(--red);
+
+    border: 1px solid var(--red);
+
+    padding: 12px;
+
+    border-radius: 9px;
+
+    width: 100%;
+
+    margin-top: 8px;
+}
+
+#loginMessage {
+    font-weight: bold;
+}
+
+
+/* =====================================================
+   MAIN SYSTEM
+===================================================== */
+
+#mainSystem {
+    display: none;
+}
+
+header {
+    background: white;
+
+    border-bottom: 3px solid #f7cccc;
+
+    padding: 18px 25px;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    flex-wrap: wrap;
+}
+
+header h1 {
+    margin: 0;
+
+    color: var(--dark-red);
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.user-badge {
+    background: var(--light-red);
+
+    color: var(--dark-red);
+
+    padding: 9px 14px;
+
+    border-radius: 20px;
+
+    font-weight: bold;
+}
+
+.logout-btn {
+    background: #333;
+    color: white;
+
+    padding: 10px 15px;
+
+    border-radius: 8px;
+}
+
+
+/* =====================================================
+   CONTAINER
+===================================================== */
+
+.container {
+    max-width: 1200px;
+
+    margin: auto;
+
+    padding: 20px;
+}
+
+
+/* =====================================================
+   CARDS
+===================================================== */
+
+.card {
+    background: white;
+
+    padding: 25px;
+
+    margin-bottom: 20px;
+
+    border-radius: 16px;
+
+    border: 1px solid #f3d2d2;
+
+    box-shadow:
+        0 5px 18px rgba(0,0,0,.06);
+}
+
+.card h2 {
+    margin-top: 0;
+
+    color: var(--dark-red);
+}
+
+
+/* =====================================================
+   INPUTS
+===================================================== */
+
+.form-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(auto-fit, minmax(220px, 1fr));
+
+    gap: 15px;
+}
+
+.form-group label {
+    display: block;
+
+    font-weight: bold;
+
+    margin-bottom: 6px;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+
+    padding: 12px;
+
+    border: 1px solid #ddd;
+
+    border-radius: 8px;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    outline: none;
+
+    border-color: var(--red);
+}
+
+
+/* =====================================================
+   BUTTONS
+===================================================== */
+
+.btn {
+    padding: 12px 18px;
+
+    border-radius: 8px;
+
+    margin: 5px 3px;
+}
+
+.btn-red {
+    background: var(--red);
+    color: white;
+}
+
+.btn-light {
+    background: var(--light-red);
+    color: var(--dark-red);
+
+    border: 1px solid var(--border-red);
+}
+
+.btn-green {
+    background: var(--green);
+    color: white;
+}
+
+.btn-dark {
+    background: #333;
+    color: white;
+}
+
+.btn-danger {
+    background: #dc3545;
+    color: white;
+}
+
+
+/* =====================================================
+   DASHBOARD
+===================================================== */
+
+.dashboard {
+    display: grid;
+
+    grid-template-columns:
+        repeat(auto-fit, minmax(200px, 1fr));
+
+    gap: 15px;
+
+    margin-bottom: 20px;
+}
+
+.stat {
+    background: white;
+
+    border: 1px solid #f3d2d2;
+
+    border-radius: 14px;
+
+    padding: 20px;
+
+    text-align: center;
+}
+
+.stat-icon {
+    font-size: 30px;
+}
+
+.stat-number {
+    font-size: 30px;
+
+    font-weight: bold;
+
+    color: var(--dark-red);
+}
+
+.stat-label {
+    color: #777;
+}
+
+
+/* =====================================================
+   SCANNER
+===================================================== */
+
+.scanner-wrapper {
+    max-width: 450px;
+
+    margin: auto;
+}
+
+#reader {
+    width: 100%;
+
+    border: 5px solid #ddd;
+
+    border-radius: 15px;
+
+    overflow: hidden;
+
+    transition: .2s;
+}
+
+/* GREEN BORDER WHEN QR IS DETECTED */
+
+#reader.scan-success {
+    border-color: #28a745 !important;
+
+    box-shadow:
+        0 0 25px rgba(40,167,69,.7);
+}
+
+.scanner-info {
+    background: var(--light-red);
+
+    padding: 12px;
+
+    border-radius: 10px;
+
+    margin-top: 12px;
+
+    text-align: center;
+}
+
+
+/* =====================================================
+   STUDENT QR CARDS
+===================================================== */
+
+.student-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(auto-fit, minmax(230px, 1fr));
+
+    gap: 18px;
+}
+
+.student-card {
+    border: 1px solid #f0d1d1;
+
+    border-radius: 14px;
+
+    padding: 20px;
+
+    text-align: center;
+
+    background: #fffafa;
+}
+
+.student-card h3 {
+    margin-bottom: 5px;
+
+    color: #444;
+}
+
+.qr-box {
+    display: flex;
+
+    justify-content: center;
+
+    margin: 15px 0;
+}
+
+.student-id {
+    color: var(--red);
+
+    font-weight: bold;
+}
+
+
+/* =====================================================
+   TABLE
+===================================================== */
+
+.table-container {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+
+    border-collapse: collapse;
+
+    margin-top: 15px;
+}
+
+th {
+    background: var(--light-red);
+
+    color: var(--dark-red);
+}
+
+th,
+td {
+    padding: 12px;
+
+    border-bottom: 1px solid #eee;
+
+    text-align: left;
+}
+
+.present {
+    color: var(--green);
+
+    font-weight: bold;
+}
+
+
+/* =====================================================
+   SUCCESS POPUP
+===================================================== */
+
+#successPopup {
+    display: none;
+
+    position: fixed;
+
+    inset: 0;
+
+    background: rgba(0,0,0,.45);
+
+    z-index: 1000;
+
+    justify-content: center;
+
+    align-items: center;
+
+    padding: 20px;
+}
+
+.success-box {
+    background: white;
+
+    width: 100%;
+
+    max-width: 360px;
+
+    padding: 35px;
+
+    border-radius: 22px;
+
+    text-align: center;
+
+    animation: popup .3s ease;
+}
+
+@keyframes popup {
+
+    from {
+        transform: scale(.7);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+}
+
+.check-circle {
+    width: 105px;
+    height: 105px;
+
+    margin: auto;
+
+    background: var(--green);
+
+    border-radius: 50%;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    animation: pop .5s ease;
+}
+
+.check {
+    color: white;
+
+    font-size: 65px;
+
+    font-weight: bold;
+
+    animation: check .5s ease;
+}
+
+@keyframes pop {
+
+    0% {
+        transform: scale(0);
+    }
+
+    70% {
+        transform: scale(1.15);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+
+}
+
+@keyframes check {
+
+    0% {
+        transform: scale(0);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+
+}
+
+.success-name {
+    font-size: 22px;
+
+    font-weight: bold;
+
+    margin-top: 20px;
+}
+
+.present-big {
+    color: var(--green);
+
+    font-size: 20px;
+
+    font-weight: bold;
+}
+
+
+/* =====================================================
+   ADMIN APPROVAL
+===================================================== */
+
+.pending {
+    background: #fff8e1;
+
+    border: 1px solid #f0d98c;
+
+    padding: 12px;
+
+    border-radius: 8px;
+
+    margin-bottom: 10px;
+}
+
+.approved {
+    color: var(--green);
+
+    font-weight: bold;
+}
+
+
+/* =====================================================
+   HIDDEN
+===================================================== */
+
+.hidden {
+    display: none !important;
+}
+
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media(max-width:600px) {
+
+    header {
+        padding: 15px;
+    }
+
+    header h1 {
+        font-size: 21px;
+    }
+
+    .container {
+        padding: 10px;
+    }
+
+    .card {
+        padding: 18px;
+    }
+
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     LOGIN PAGE
+===================================================== -->
+
+<div id="loginPage">
+
+<div class="login-box">
+
+    <div class="logo">
+        📱
+    </div>
+
+    <h1>QR Attendance</h1>
+
+    <p>
+        Event Attendance Management System
+    </p>
+
+
+    <!-- LOGIN FORM -->
+
+    <div id="loginForm">
+
+        <input
+            type="text"
+            id="username"
+            placeholder="Username">
+
+        <input
+            type="password"
+            id="password"
+            placeholder="Password">
+
+        <button
+            class="login-btn"
+            onclick="login()">
+
+            🔐 Login
+
+        </button>
+
+        <button
+            class="create-btn"
+            onclick="showCreateAccount()">
+
+            📝 Create Account
+
+        </button>
+
+    </div>
+
+
+    <!-- CREATE ACCOUNT -->
+
+    <div
+        id="createAccountForm"
+        class="hidden">
+
+        <input
+            type="text"
+            id="newFullName"
+            placeholder="Full Name">
+
+        <input
+            type="text"
+            id="newUsername"
+            placeholder="Username">
+
+        <input
+            type="password"
+            id="newPassword"
+            placeholder="Password">
+
+        <input
+            type="password"
+            id="confirmPassword"
+            placeholder="Confirm Password">
+
+        <button
+            class="login-btn"
+            onclick="createAccount()">
+
+            Create Account
+
+        </button>
+
+        <button
+            class="create-btn"
+            onclick="showLogin()">
+
+            Back to Login
+
+        </button>
+
+    </div>
+
+
+    <p id="loginMessage"></p>
+
+    <small>
+        Default Admin:
+        <b>admin</b> /
+        <b>admin123</b>
+    </small>
+
+</div>
+
+</div>
+
+
+
+<!-- =====================================================
+     MAIN SYSTEM
+===================================================== -->
+
+<div id="mainSystem">
+
+
+<header>
+
+    <h1>
+        📱 QR Event Attendance
+    </h1>
+
+    <div class="header-right">
+
+        <div
+            class="user-badge"
+            id="currentUser">
+        </div>
+
+        <button
+            class="logout-btn"
+            onclick="logout()">
+
+            Logout
+
+        </button>
+
+    </div>
+
+</header>
+
+
+
+<div class="container">
+
+
+<!-- =====================================================
+     DASHBOARD
+===================================================== -->
+
+<div class="dashboard">
+
+    <div class="stat">
+
+        <div class="stat-icon">
+            👨‍🎓
+        </div>
+
+        <div
+            class="stat-number"
+            id="studentCount">
+
+            0
+
+        </div>
+
+        <div class="stat-label">
+            Registered Students
+        </div>
+
+    </div>
+
+
+    <div class="stat">
+
+        <div class="stat-icon">
+            📋
+        </div>
+
+        <div
+            class="stat-number"
+            id="attendanceCount">
+
+            0
+
+        </div>
+
+        <div class="stat-label">
+            Attendance
+        </div>
+
+    </div>
+
+
+    <div class="stat">
+
+        <div class="stat-icon">
+            👤
+        </div>
+
+        <div
+            class="stat-number"
+            id="accountCount">
+
+            0
+
+        </div>
+
+        <div class="stat-label">
+            Accounts
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- =====================================================
+     EVENT SETUP
+===================================================== -->
+
+<div class="card">
+
+    <h2>🎪 Event Setup</h2>
+
+    <div class="form-grid">
+
+        <div class="form-group">
+
+            <label>
+                Event Name
+            </label>
+
+            <input
+                type="text"
+                id="eventName"
+                value="School Seminar 2026">
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- =====================================================
+     STUDENT REGISTRATION
+===================================================== -->
+
+<div class="card">
+
+    <h2>👨‍🎓 Student Registration</h2>
+
+    <p>
+        Enter the Student ID and Student Name.
+        The system will automatically generate a QR code.
+    </p>
+
+
+    <div class="form-grid">
+
+        <div class="form-group">
+
+            <label>
+                Student ID
+            </label>
+
+            <input
+                type="text"
+                id="studentID"
+                placeholder="Example: C2425-00031">
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>
+                Student Name
+            </label>
+
+            <input
+                type="text"
+                id="studentName"
+                placeholder="Example: Juan Dela Cruz">
+
+        </div>
+
+    </div>
+
+
+    <br>
+
+
+    <button
+        class="btn btn-red"
+        onclick="registerStudent()">
+
+        🔲 Generate QR Code
+
+    </button>
+
+
+    <p
+        id="registrationMessage">
+    </p>
+
+</div>
+
+
+
+<!-- =====================================================
+     SCANNER
+===================================================== -->
+
+<div class="card">
+
+    <h2>📷 QR Code Scanner</h2>
+
+    <p>
+        Click <b>Start Scanner</b> and point the camera
+        toward the student's QR code.
+    </p>
+
+
+    <div class="scanner-wrapper">
+
+        <div id="reader"></div>
+
+        <div
+            class="scanner-info"
+            id="scannerStatus">
+
+            Ready to scan.
+
+        </div>
+
+        <br>
+
+        <button
+            class="btn btn-red"
+            onclick="startScanner()">
+
+            📷 Start Scanner
+
+        </button>
+
+        <button
+            class="btn btn-dark"
+            onclick="stopScanner()">
+
+            ⛔ Stop Scanner
+
+        </button>
+
+    </div>
+
+</div>
+
+
+
+<!-- =====================================================
+     STUDENT QR CODES
+===================================================== -->
+
+<div class="card">
+
+    <h2>🔲 Student QR Codes</h2>
+
+    <div
+        id="studentQR"
+        class="student-grid">
+
+    </div>
+
+</div>
+
+
+
+<!-- =====================================================
+     ATTENDANCE RECORDS
+===================================================== -->
+
+<div class="card">
+
+    <h2>📋 Attendance Records</h2>
+
+
+    <input
+        type="text"
+        id="searchAttendance"
+        placeholder="🔎 Search student or ID..."
+        onkeyup="displayAttendance()">
+
+
+    <div class="table-container">
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>
+                        Student ID
+                    </th>
+
+                    <th>
+                        Name
+                    </th>
+
+                    <th>
+                        Event
+                    </th>
+
+                    <th>
+                        Date
+                    </th>
+
+                    <th>
+                        Time
+                    </th>
+
+                    <th>
+                        Status
+                    </th>
+
+                </tr>
+
+            </thead>
+
+            <tbody
+                id="attendanceTable">
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+
+    <button
+        class="btn btn-light"
+        onclick="downloadCSV()">
+
+        📥 Download Attendance CSV
+
+    </button>
+
+    <button
+        class="btn btn-danger"
+        onclick="clearAttendance()">
+
+        🗑 Clear Attendance
+
+    </button>
+
+</div>
+
+
+
+<!-- =====================================================
+     ADMIN ACCOUNT APPROVAL
+===================================================== -->
+
+<div
+    class="card"
+    id="adminPanel">
+
+    <h2>👑 Admin Account Management</h2>
+
+    <p>
+        New accounts require administrator approval.
+    </p>
+
+    <div id="pendingAccounts"></div>
+
+</div>
+
+
+</div>
+</div>
+
+
+
+<!-- =====================================================
+     SUCCESS POPUP
+===================================================== -->
+
+<div id="successPopup">
+
+    <div class="success-box">
+
+        <div class="check-circle">
+
+            <div class="check">
+                ✓
+            </div>
+
+        </div>
+
+
+        <div
+            class="success-name"
+            id="successName">
+
+        </div>
+
+
+        <p class="present-big">
+            PRESENT ✓
+        </p>
+
+
+        <p id="successDetails"></p>
+
+
+        <button
+            class="btn btn-red"
+            onclick="closeSuccess()">
+
+            OK
+
+        </button>
+
+    </div>
+
+</div>
+
+
+
+<script>
+
+/* =====================================================
+   GOOGLE APPS SCRIPT
+===================================================== */
+
+/*
+   AFTER CREATING YOUR GOOGLE APPS SCRIPT,
+   PASTE THE WEB APP URL HERE.
+*/
+
+const APPS_SCRIPT_URL =
+"PASTE_YOUR_APPS_SCRIPT_URL_HERE";
+
+
+
+/* =====================================================
+   DEFAULT ADMIN
+===================================================== */
+
+let accounts =
+JSON.parse(
+    localStorage.getItem("accounts") || "[]"
+);
+
+
+/*
+   Create default admin if none exists
+*/
+
+if (
+    !accounts.some(
+        account =>
+        account.username === "admin"
+    )
+) {
+
+    accounts.push({
+
+        name: "System Administrator",
+
+        username: "admin",
+
+        password: "admin123",
+
+        role: "admin",
+
+        approved: true
+
+    });
+
+
+    localStorage.setItem(
+        "accounts",
+        JSON.stringify(accounts)
+    );
+
+}
+
+
+
+/* =====================================================
+   STUDENTS
+===================================================== */
+
+let students =
+JSON.parse(
+    localStorage.getItem(
+        "students"
+    ) || "[]"
+);
+
+
+
+/* =====================================================
+   ATTENDANCE
+===================================================== */
+
+let attendance =
+JSON.parse(
+    localStorage.getItem(
+        "attendance"
+    ) || "[]"
+);
+
+
+
+/* =====================================================
+   CURRENT USER
+===================================================== */
+
+let currentUser = null;
+
+
+
+/* =====================================================
+   LOGIN
+===================================================== */
+
+function login() {
+
+    const username =
+    document
+    .getElementById("username")
+    .value
+    .trim();
+
+    const password =
+    document
+    .getElementById("password")
+    .value;
+
+
+    const account =
+    accounts.find(
+
+        a =>
+        a.username === username &&
+        a.password === password
+
+    );
+
+
+    if (!account) {
+
+        showLoginMessage(
+            "❌ Incorrect username or password."
+        );
+
+        return;
+
+    }
+
+
+    if (!account.approved) {
+
+        showLoginMessage(
+            "⏳ Your account is waiting for admin approval."
+        );
+
+        return;
+
+    }
+
+
+    currentUser = account;
+
+
+    document
+    .getElementById("loginPage")
+    .style.display = "none";
+
+
+    document
+    .getElementById("mainSystem")
+    .style.display = "block";
+
+
+    document
+    .getElementById("currentUser")
+    .innerHTML =
+    account.name +
+    " (" +
+    account.role +
+    ")";
+
+
+    /*
+       Only admin can see account approval
+    */
+
+    if (account.role === "admin") {
+
+        document
+        .getElementById("adminPanel")
+        .style.display = "block";
+
+        displayPendingAccounts();
+
+    }
+
+    else {
+
+        document
+        .getElementById("adminPanel")
+        .style.display = "none";
+
+    }
+
+
+    updateDashboard();
+
+    displayStudents();
+
+    displayAttendance();
+
+}
+
+
+
+/* =====================================================
+   CREATE ACCOUNT
+===================================================== */
+
+function createAccount() {
+
+    const name =
+    document
+    .getElementById("newFullName")
+    .value
+    .trim();
+
+    const username =
+    document
+    .getElementById("newUsername")
+    .value
+    .trim();
+
+    const password =
+    document
+    .getElementById("newPassword")
+    .value;
+
+    const confirm =
+    document
+    .getElementById("confirmPassword")
+    .value;
+
+
+    if (
+        !name ||
+        !username ||
+        !password ||
+        !confirm
+    ) {
+
+        showLoginMessage(
+            "❌ Please complete all fields."
+        );
+
+        return;
+
+    }
+
+
+    if (password !== confirm) {
+
+        showLoginMessage(
+            "❌ Passwords do not match."
+        );
+
+        return;
+
+    }
+
+
+    if (
+        accounts.some(
+            a =>
+            a.username === username
+        )
+    ) {
+
+        showLoginMessage(
+            "❌ Username already exists."
+        );
+
+        return;
+
+    }
+
+
+    accounts.push({
+
+        name: name,
+
+        username: username,
+
+        password: password,
+
+        role: "organizer",
+
+        approved: false
+
+    });
+
+
+    localStorage.setItem(
+        "accounts",
+        JSON.stringify(accounts)
+    );
+
+
+    showLoginMessage(
+        "✅ Account created. Wait for Admin approval."
+    );
+
+
+    document
+    .getElementById("newFullName")
+    .value = "";
+
+    document
+    .getElementById("newUsername")
+    .value = "";
+
+    document
+    .getElementById("newPassword")
+    .value = "";
+
+    document
+    .getElementById("confirmPassword")
+    .value = "";
+
+}
+
+
+
+/* =====================================================
+   SHOW CREATE ACCOUNT
+===================================================== */
+
+function showCreateAccount() {
+
+    document
+    .getElementById("loginForm")
+    .classList.add("hidden");
+
+
+    document
+    .getElementById("createAccountForm")
+    .classList.remove("hidden");
+
+}
+
+
+
+/* =====================================================
+   SHOW LOGIN
+===================================================== */
+
+function showLogin() {
+
+    document
+    .getElementById("createAccountForm")
+    .classList.add("hidden");
+
+
+    document
+    .getElementById("loginForm")
+    .classList.remove("hidden");
+
+}
+
+
+
+/* =====================================================
+   LOGIN MESSAGE
+===================================================== */
+
+function showLoginMessage(message) {
+
+    document
+    .getElementById("loginMessage")
+    .innerHTML = message;
+
+}
+
+
+
+/* =====================================================
+   LOGOUT
+===================================================== */
+
+function logout() {
+
+    stopScanner();
+
+    currentUser = null;
+
+    document
+    .getElementById("mainSystem")
+    .style.display = "none";
+
+
+    document
+    .getElementById("loginPage")
+    .style.display = "flex";
+
+
+    document
+    .getElementById("password")
+    .value = "";
+
+}
+
+
+
+/* =====================================================
+   REGISTER STUDENT
+===================================================== */
+
+function registerStudent() {
+
+    const id =
+    document
+    .getElementById("studentID")
+    .value
+    .trim();
+
+    const name =
+    document
+    .getElementById("studentName")
+    .value
+    .trim();
+
+
+    const message =
+    document
+    .getElementById(
+        "registrationMessage"
+    );
+
+
+    if (!id || !name) {
+
+        message.innerHTML =
+        "❌ Please enter Student ID and Name.";
+
+        return;
+
+    }
+
+
+    const duplicate =
+    students.some(
+        student =>
+        student.id.toLowerCase()
+        === id.toLowerCase()
+    );
+
+
+    if (duplicate) {
+
+        message.innerHTML =
+        "⚠️ Student ID already registered.";
+
+        return;
+
+    }
+
+
+    const student = {
+
+        id: id,
+
+        name: name,
+
+        createdAt:
+        new Date().toISOString()
+
+    };
+
+
+    students.push(student);
+
+
+    localStorage.setItem(
+
+        "students",
+
+        JSON.stringify(students)
+
+    );
+
+
+    createStudentQR(student);
+
+
+    document
+    .getElementById("studentID")
+    .value = "";
+
+
+    document
+    .getElementById("studentName")
+    .value = "";
+
+
+    message.innerHTML =
+    "✅ Student registered and QR code generated!";
+
+
+    updateDashboard();
+
+}
+
+
+
+/* =====================================================
+   CREATE QR CARD
+===================================================== */
+
+function createStudentQR(student) {
+
+    const card =
+    document.createElement("div");
+
+    card.className =
+    "student-card";
+
+
+    const qrID =
+    "qr_" +
+    Date.now() +
+    "_" +
+    Math.random()
+    .toString(36)
+    .substring(2,8);
+
+
+    card.innerHTML = `
+
+        <h3>
+            ${escapeHTML(student.name)}
+        </h3>
+
+        <p>
+            Student ID:
+            <span class="student-id">
+                ${escapeHTML(student.id)}
+            </span>
+        </p>
+
+        <div
+            class="qr-box"
+            id="${qrID}">
+        </div>
+
+        <p>
+            📱 Scan this QR
+        </p>
+
+        <button
+            class="btn btn-light"
+            onclick="printQR('${qrID}')">
+
+            🖨 Print QR
+
+        </button>
+
+    `;
+
+
+    document
+    .getElementById("studentQR")
+    .appendChild(card);
+
+
+    new QRCode(
+
+        document.getElementById(qrID),
+
+        {
+
+            text: student.id,
+
+            width: 170,
+
+            height: 170,
+
+            correctLevel:
+            QRCode.CorrectLevel.H
+
+        }
+
+    );
+
+}
+
+
+
+/* =====================================================
+   DISPLAY STUDENTS
+===================================================== */
+
+function displayStudents() {
+
+    const container =
+    document
+    .getElementById("studentQR");
+
+
+    container.innerHTML = "";
+
+
+    students.forEach(
+        student =>
+        createStudentQR(student)
+    );
+
+}
+
+
+
+/* =====================================================
+   PRINT QR
+===================================================== */
+
+function printQR(qrID) {
+
+    const qr =
+    document
+    .getElementById(qrID);
+
+
+    const image =
+    qr.querySelector("img");
+
+
+    if (!image) {
+
+        alert(
+            "QR code is still loading."
+        );
+
+        return;
+
+    }
+
+
+    const windowPrint =
+    window.open(
+        "",
+        "_blank"
+    );
+
+
+    windowPrint.document.write(`
+
+        <html>
+
+        <head>
+
+        <title>
+            Student QR Code
+        </title>
+
+        </head>
+
+        <body
+        style="
+        text-align:center;
+        font-family:Arial;
+        padding:40px;
+        ">
+
+        <img
+        src="${image.src}"
+        width="250">
+
+        </body>
+
+        </html>
+
+    `);
+
+
+    windowPrint.document.close();
+
+    windowPrint.print();
+
+}
+
+
+
+/* =====================================================
+   SCANNER
+===================================================== */
+
+let scanner = null;
+
+let scanning = false;
+
+let scanLocked = false;
+
+
+
+function startScanner() {
+
+    if (scanning) {
+
+        return;
+
+    }
+
+
+    if (
+        typeof Html5Qrcode ===
+        "undefined"
+    ) {
+
+        document
+        .getElementById(
+            "scannerStatus"
+        )
+        .innerHTML =
+        "❌ Scanner library could not load.";
+
+        return;
+
+    }
+
+
+    scanLocked = false;
+
+
+    document
+    .getElementById(
+        "scannerStatus"
+    )
+    .innerHTML =
+    "📷 Opening camera...";
+
+
+    scanner =
+    new Html5Qrcode("reader");
+
+
+    scanner.start(
+
+        {
+            facingMode:
+            "environment"
+        },
+
+        {
+
+            fps: 10,
+
+            qrbox: {
+                width: 250,
+                height: 250
+            },
+
+            aspectRatio: 1.0
+
+        },
+
+
+        function(decodedText) {
+
+            if (scanLocked) {
+
+                return;
+
+            }
+
+
+            scanLocked = true;
+
+
+            /*
+               GREEN BORDER
+            */
+
+            document
+            .getElementById("reader")
+            .classList.add(
+                "scan-success"
+            );
+
+
+            document
+            .getElementById(
+                "scannerStatus"
+            )
+            .innerHTML =
+            "🟢 QR CODE DETECTED!";
+
+
+            /*
+               PROCESS ATTENDANCE
+            */
+
+            processAttendance(
+                decodedText
+            );
+
+
+            /*
+               Stop after one successful scan
+            */
+
+            setTimeout(
+
+                function() {
+
+                    stopScanner();
+
+                },
+
+                1000
+
+            );
+
+        },
+
+
+        function(errorMessage) {
+
+            /*
+               Normal camera
+               scanning errors ignored
+            */
+
+        }
+
+    )
+
+    .then(function() {
+
+        scanning = true;
+
+
+        document
+        .getElementById(
+            "scannerStatus"
+        )
+        .innerHTML =
+        "📷 Scanner active. Point at a QR code.";
+
+    })
+
+
+    .catch(function(error) {
+
+        scanning = false;
+
+        console.error(error);
+
+
+        document
+        .getElementById(
+            "scannerStatus"
+        )
+        .innerHTML =
+
+        "❌ Camera permission required.<br>" +
+
+        "Please allow camera access and use HTTPS.";
+
+    });
+
+}
+
+
+
+/* =====================================================
+   STOP SCANNER
+===================================================== */
+
+function stopScanner() {
+
+    if (
+        scanner &&
+        scanning
+    ) {
+
+        scanner.stop()
+
+        .then(function() {
+
+            scanner.clear();
+
+            scanner = null;
+
+            scanning = false;
+
+        })
+
+        .catch(function() {
+
+            scanner = null;
+
+            scanning = false;
+
+        });
+
+    }
+
+
+    document
+    .getElementById("reader")
+    .classList.remove(
+        "scan-success"
+    );
+
+}
+
+
+
+/* =====================================================
+   PROCESS ATTENDANCE
+===================================================== */
+
+function processAttendance(
+    studentID
+) {
+
+    const student =
+    students.find(
+
+        student =>
+        student.id === studentID
+
+    );
+
+
+    if (!student) {
+
+        document
+        .getElementById(
+            "scannerStatus"
+        )
+        .innerHTML =
+        "❌ Student is not registered.";
+
+        return;
+
+    }
+
+
+    const event =
+    document
+    .getElementById(
+        "eventName"
+    )
+    .value
+    .trim();
+
+
+    if (!event) {
+
+        alert(
+            "Please enter an event name."
+        );
+
+        return;
+
+    }
+
+
+    const duplicate =
+    attendance.some(
+
+        record =>
+        record.id === student.id &&
+        record.event === event
+
+    );
+
+
+    if (duplicate) {
+
+        document
+        .getElementById(
+            "scannerStatus"
+        )
+        .innerHTML =
+        "⚠️ Student already recorded for this event.";
+
+        return;
+
+    }
+
+
+    const now =
+    new Date();
+
+
+    const record = {
+
+        id: student.id,
+
+        name: student.name,
+
+        event: event,
+
+        date:
+        now.toLocaleDateString(),
+
+        time:
+        now.toLocaleTimeString(),
+
+        status:
+        "Present"
+
+    };
+
+
+    /*
+       SAVE LOCALLY
+    */
+
+    attendance.push(record);
+
+
+    localStorage.setItem(
+
+        "attendance",
+
+        JSON.stringify(
+            attendance
+        )
+
+    );
+
+
+    /*
+       SEND TO GOOGLE SHEETS
+    */
+
+    sendToGoogleSheets(record);
+
+
+    /*
+       UPDATE TABLE
+    */
+
+    displayAttendance();
+
+    updateDashboard();
+
+
+    /*
+       SHOW SUCCESS
+    */
+
+    showSuccess(
+        student,
+        event,
+        record
+    );
+
+}
+
+
+
+/* =====================================================
+   SUCCESS POPUP
+===================================================== */
+
+function showSuccess(
+    student,
+    event,
+    record
+) {
+
+    document
+    .getElementById(
+        "successName"
+    )
+    .innerHTML =
+    escapeHTML(student.name);
+
+
+    document
+    .getElementById(
+        "successDetails"
+    )
+    .innerHTML =
+
+    "Student ID: <b>" +
+    escapeHTML(student.id) +
+    "</b><br><br>" +
+
+    "Event: " +
+    escapeHTML(event) +
+    "<br>" +
+
+    "Date: " +
+    record.date +
+    "<br>" +
+
+    "Time: " +
+    record.time;
+
+
+    document
+    .getElementById(
+        "successPopup"
+    )
+    .style.display =
+    "flex";
+
+}
+
+
+
+/* =====================================================
+   CLOSE SUCCESS
+===================================================== */
+
+function closeSuccess() {
+
+    document
+    .getElementById(
+        "successPopup"
+    )
+    .style.display =
+    "none";
+
+
+    document
+    .getElementById(
+        "scannerStatus"
+    )
+    .innerHTML =
+    "Ready for the next scan.";
+
+}
+
+
+
+/* =====================================================
+   ATTENDANCE TABLE
+===================================================== */
+
+function displayAttendance() {
+
+    const table =
+    document
+    .getElementById(
+        "attendanceTable"
+    );
+
+
+    const search =
+    document
+    .getElementById(
+        "searchAttendance"
+    )
+    .value
+    .toLowerCase();
+
+
+    table.innerHTML = "";
+
+
+    const filtered =
+    attendance.filter(
+
+        record =>
+
+        record.id
+        .toLowerCase()
+        .includes(search)
+
+        ||
+
+        record.name
+        .toLowerCase()
+        .includes(search)
+
+        ||
+
+        record.event
+        .toLowerCase()
+        .includes(search)
+
+    );
+
+
+    if (
+        filtered.length === 0
+    ) {
+
+        table.innerHTML = `
+
+            <tr>
+
+                <td
+                colspan="6"
+                style="text-align:center">
+
+                    No attendance records found.
+
+                </td>
+
+            </tr>
+
+        `;
+
+        return;
+
+    }
+
+
+    filtered
+    .slice()
+    .reverse()
+    .forEach(
+
+        record => {
+
+            const row =
+            document.createElement("tr");
+
+
+            row.innerHTML = `
+
+                <td>
+                    ${escapeHTML(record.id)}
+                </td>
+
+                <td>
+                    ${escapeHTML(record.name)}
+                </td>
+
+                <td>
+                    ${escapeHTML(record.event)}
+                </td>
+
+                <td>
+                    ${escapeHTML(record.date)}
+                </td>
+
+                <td>
+                    ${escapeHTML(record.time)}
+                </td>
+
+                <td class="present">
+                    ✓ ${escapeHTML(record.status)}
+                </td>
+
+            `;
+
+
+            table.appendChild(row);
+
+        }
+
+    );
+
+}
+
+
+
+/* =====================================================
+   DASHBOARD
+===================================================== */
+
+function updateDashboard() {
+
+    document
+    .getElementById(
+        "studentCount"
+    )
+    .innerHTML =
+    students.length;
+
+
+    document
+    .getElementById(
+        "attendanceCount"
+    )
+    .innerHTML =
+    attendance.length;
+
+
+    document
+    .getElementById(
+        "accountCount"
+    )
+    .innerHTML =
+    accounts.length;
+
+}
+
+
+
+/* =====================================================
+   ADMIN ACCOUNT APPROVAL
+===================================================== */
+
+function displayPendingAccounts() {
+
+    const container =
+    document
+    .getElementById(
+        "pendingAccounts"
+    );
+
+
+    container.innerHTML = "";
+
+
+    const pending =
+    accounts.filter(
+
+        account =>
+        !account.approved &&
+        account.role !== "admin"
+
+    );
+
+
+    if (
+        pending.length === 0
+    ) {
+
+        container.innerHTML =
+        "<p>✅ No pending accounts.</p>";
+
+        return;
+
+    }
+
+
+    pending.forEach(
+
+        account => {
+
+            const box =
+            document.createElement("div");
+
+
+            box.className =
+            "pending";
+
+
+            box.innerHTML = `
+
+                <b>
+                    ${escapeHTML(account.name)}
+                </b>
+
+                <br>
+
+                Username:
+                ${escapeHTML(account.username)}
+
+                <br><br>
+
+                <button
+                class="btn btn-green"
+                onclick="approveAccount('${encodeURIComponent(account.username)}')">
+
+                    ✓ Approve
+
+                </button>
+
+                <button
+                class="btn btn-danger"
+                onclick="rejectAccount('${encodeURIComponent(account.username)}')">
+
+                    ✕ Reject
+
+                </button>
+
+            `;
+
+
+            container.appendChild(box);
+
+        }
+
+    );
+
+}
+
+
+
+/* =====================================================
+   APPROVE ACCOUNT
+===================================================== */
+
+function approveAccount(encodedUsername) {
+
+    const username =
+    decodeURIComponent(
+        encodedUsername
+    );
+
+
+    const account =
+    accounts.find(
+        a =>
+        a.username === username
+    );
+
+
+    if (!account) {
+        return;
+    }
+
+
+    account.approved = true;
+
+
+    localStorage.setItem(
+
+        "accounts",
+
+        JSON.stringify(
+            accounts
+        )
+
+    );
+
+
+    displayPendingAccounts();
+
+    updateDashboard();
+
+}
+
+
+
+/* =====================================================
+   REJECT ACCOUNT
+===================================================== */
+
+function rejectAccount(encodedUsername) {
+
+    const username =
+    decodeURIComponent(
+        encodedUsername
+    );
+
+
+    accounts =
+    accounts.filter(
+
+        account =>
+        account.username !== username
+
+    );
+
+
+    localStorage.setItem(
+
+        "accounts",
+
+        JSON.stringify(
+            accounts
+        )
+
+    );
+
+
+    displayPendingAccounts();
+
+    updateDashboard();
+
+}
+
+
+
+/* =====================================================
+   GOOGLE APPS SCRIPT
+===================================================== */
+
+function sendToGoogleSheets(data) {
+
+    if (
+
+        APPS_SCRIPT_URL.includes(
+            "PASTE_YOUR"
+        )
+
+    ) {
+
+        console.log(
+            "Google Apps Script URL not connected."
+        );
+
+        return;
+
+    }
+
+
+    fetch(
+
+        APPS_SCRIPT_URL,
+
+        {
+
+            method: "POST",
+
+            mode: "no-cors",
+
+            headers: {
+
+                "Content-Type":
+                "text/plain"
+
+            },
+
+            body:
+            JSON.stringify(data)
+
+        }
+
+    )
+
+    .then(function() {
+
+        console.log(
+            "Attendance sent to Google Sheets."
+        );
+
+    })
+
+    .catch(function(error) {
+
+        console.log(
+            "Google Sheets connection error:",
+            error
+        );
+
+    });
+
+}
+
+
+
+/* =====================================================
+   DOWNLOAD CSV
+===================================================== */
+
+function downloadCSV() {
+
+    if (
+        attendance.length === 0
+    ) {
+
+        alert(
+            "No attendance records to download."
+        );
+
+        return;
+
+    }
+
+
+    let csv =
+    "Student ID,Name,Event,Date,Time,Status\n";
+
+
+    attendance.forEach(
+
+        record => {
+
+            csv +=
+            `"${record.id}",` +
+            `"${record.name}",` +
+            `"${record.event}",` +
+            `"${record.date}",` +
+            `"${record.time}",` +
+            `"${record.status}"\n`;
+
+        }
+
+    );
+
+
+    const blob =
+    new Blob(
+        [csv],
+        {
+            type:
+            "text/csv"
+        }
+    );
+
+
+    const url =
+    URL.createObjectURL(blob);
+
+
+    const link =
+    document.createElement("a");
+
+
+    link.href = url;
+
+    link.download =
+    "attendance_records.csv";
+
+
+    link.click();
+
+
+    URL.revokeObjectURL(url);
+
+}
+
+
+
+/* =====================================================
+   CLEAR ATTENDANCE
+===================================================== */
+
+function clearAttendance() {
+
+    if (
+        currentUser &&
+        currentUser.role !== "admin"
+    ) {
+
+        alert(
+            "Only the Admin can clear attendance records."
+        );
+
+        return;
+
+    }
+
+
+    if (
+        !confirm(
+            "Are you sure you want to clear all attendance records?"
+        )
+    ) {
+
+        return;
+
+    }
+
+
+    attendance = [];
+
+
+    localStorage.setItem(
+
+        "attendance",
+
+        JSON.stringify(
+            attendance
+        )
+
+    );
+
+
+    displayAttendance();
+
+    updateDashboard();
+
+}
+
+
+
+/* =====================================================
+   ESCAPE HTML
+===================================================== */
+
+function escapeHTML(text) {
+
+    return String(text)
+
+        .replace(
+            /&/g,
+            "&amp;"
+        )
+
+        .replace(
+            /</g,
+            "&lt;"
+        )
+
+        .replace(
+            />/g,
+            "&gt;"
+        )
+
+        .replace(
+            /"/g,
+            "&quot;"
+        )
+
+        .replace(
+            /'/g,
+            "&#039;"
+        );
+
+}
+
+
+
+/* =====================================================
+   INITIAL LOAD
+===================================================== */
+
+updateDashboard();
+
+</script>
+
+</body>
+</html>
