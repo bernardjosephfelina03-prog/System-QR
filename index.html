@@ -1,12 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
 <meta charset="UTF-8">
-
-<meta name="viewport"
-content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>QR Event Attendance System</title>
 
@@ -15,7 +11,6 @@ content="width=device-width, initial-scale=1.0">
 
 <!-- QR SCANNER -->
 <script src="https://unpkg.com/html5-qrcode"></script>
-
 
 <style>
 
@@ -47,6 +42,10 @@ button{
     margin:5px;
 }
 
+button:active{
+    transform:scale(.97);
+}
+
 .red{
     background:var(--red);
     color:white;
@@ -73,6 +72,7 @@ input{
     margin:7px 0;
     border:1px solid #ddd;
     border-radius:8px;
+    font-size:15px;
 }
 
 .hidden{
@@ -85,43 +85,22 @@ input{
 ========================= */
 
 #loginPage{
-
     min-height:100vh;
-
     display:flex;
-
     justify-content:center;
-
     align-items:center;
-
     padding:20px;
-
-    background:
-    linear-gradient(
-        135deg,
-        #ffffff,
-        #ffe5e5
-    );
-
+    background:linear-gradient(135deg,#ffffff,#ffe5e5);
 }
 
 .loginBox{
-
     width:100%;
-
     max-width:420px;
-
     background:white;
-
     padding:35px;
-
     border-radius:20px;
-
-    box-shadow:
-    0 10px 35px rgba(0,0,0,.15);
-
+    box-shadow:0 10px 35px rgba(0,0,0,.15);
     text-align:center;
-
 }
 
 .logo{
@@ -134,6 +113,7 @@ input{
 
 #message{
     font-weight:bold;
+    min-height:25px;
 }
 
 
@@ -146,22 +126,13 @@ input{
 }
 
 header{
-
     background:white;
-
-    border-bottom:
-    3px solid #f3cccc;
-
+    border-bottom:3px solid #f3cccc;
     padding:18px 25px;
-
     display:flex;
-
     justify-content:space-between;
-
     align-items:center;
-
     flex-wrap:wrap;
-
 }
 
 header h1{
@@ -169,46 +140,26 @@ header h1{
 }
 
 .userBadge{
-
     background:var(--lightred);
-
     color:var(--darkred);
-
     padding:9px 15px;
-
     border-radius:20px;
-
     font-weight:bold;
-
 }
 
-
 .container{
-
     max-width:1200px;
-
     margin:auto;
-
     padding:20px;
-
 }
 
 .card{
-
     background:white;
-
     padding:25px;
-
     margin-bottom:20px;
-
     border-radius:16px;
-
-    border:
-    1px solid var(--border);
-
-    box-shadow:
-    0 5px 18px rgba(0,0,0,.06);
-
+    border:1px solid var(--border);
+    box-shadow:0 5px 18px rgba(0,0,0,.06);
 }
 
 .card h2{
@@ -221,39 +172,23 @@ header h1{
 ========================= */
 
 .dashboard{
-
     display:grid;
-
-    grid-template-columns:
-    repeat(auto-fit,minmax(200px,1fr));
-
+    grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
     gap:15px;
-
 }
 
 .stat{
-
     background:white;
-
     padding:20px;
-
     border-radius:14px;
-
-    border:
-    1px solid var(--border);
-
+    border:1px solid var(--border);
     text-align:center;
-
 }
 
 .number{
-
     font-size:32px;
-
     font-weight:bold;
-
     color:var(--darkred);
-
 }
 
 
@@ -262,14 +197,9 @@ header h1{
 ========================= */
 
 .formGrid{
-
     display:grid;
-
-    grid-template-columns:
-    repeat(auto-fit,minmax(220px,1fr));
-
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
     gap:15px;
-
 }
 
 
@@ -278,39 +208,23 @@ header h1{
 ========================= */
 
 .studentGrid{
-
     display:grid;
-
-    grid-template-columns:
-    repeat(auto-fit,minmax(230px,1fr));
-
+    grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
     gap:18px;
-
 }
 
 .student{
-
     background:#fffafa;
-
-    border:
-    1px solid var(--border);
-
+    border:1px solid var(--border);
     padding:20px;
-
     border-radius:14px;
-
     text-align:center;
-
 }
 
 .qr{
-
     display:flex;
-
     justify-content:center;
-
     margin:15px;
-
 }
 
 
@@ -319,47 +233,26 @@ header h1{
 ========================= */
 
 #reader{
-
     max-width:450px;
-
     margin:auto;
-
-    border:
-    5px solid #ddd;
-
+    border:5px solid #ddd;
     border-radius:15px;
-
     overflow:hidden;
-
     transition:.2s;
-
 }
 
 #reader.detected{
-
-    border-color:
-    var(--green);
-
-    box-shadow:
-    0 0 25px
-    rgba(40,167,69,.7);
-
+    border-color:var(--green);
+    box-shadow:0 0 25px rgba(40,167,69,.7);
 }
 
 .scannerStatus{
-
     text-align:center;
-
     padding:14px;
-
     margin-top:12px;
-
     background:var(--lightred);
-
     border-radius:10px;
-
     font-weight:bold;
-
 }
 
 
@@ -372,28 +265,19 @@ header h1{
 }
 
 table{
-
     width:100%;
-
     border-collapse:collapse;
-
 }
 
 th{
-
     background:var(--lightred);
-
     color:var(--darkred);
-
 }
 
 th,td{
-
     padding:12px;
-
-    border-bottom:
-    1px solid #eee;
-
+    border-bottom:1px solid #eee;
+    text-align:left;
 }
 
 
@@ -402,18 +286,11 @@ th,td{
 ========================= */
 
 .pendingUser{
-
     background:#fff5f5;
-
-    border:
-    1px solid var(--border);
-
+    border:1px solid var(--border);
     padding:15px;
-
     margin-bottom:10px;
-
     border-radius:10px;
-
 }
 
 
@@ -422,107 +299,65 @@ th,td{
 ========================= */
 
 #popup{
-
     display:none;
-
     position:fixed;
-
     inset:0;
-
-    background:
-    rgba(0,0,0,.45);
-
+    background:rgba(0,0,0,.45);
     justify-content:center;
-
     align-items:center;
-
     z-index:9999;
-
 }
 
 .popupBox{
-
     background:white;
-
     width:90%;
-
     max-width:360px;
-
     padding:35px;
-
     border-radius:20px;
-
     text-align:center;
-
-    animation:
-    popup .3s ease;
-
+    animation:popup .3s ease;
 }
 
 @keyframes popup{
-
     from{
         transform:scale(.7);
         opacity:0;
     }
-
     to{
         transform:scale(1);
         opacity:1;
     }
-
 }
 
 .checkCircle{
-
     width:100px;
-
     height:100px;
-
-    background:
-    var(--green);
-
+    background:var(--green);
     border-radius:50%;
-
     margin:auto;
-
     display:flex;
-
     justify-content:center;
-
     align-items:center;
-
-    animation:
-    pop .4s ease;
-
+    animation:pop .4s ease;
 }
 
 .check{
-
     color:white;
-
     font-size:60px;
-
     font-weight:bold;
-
 }
 
 @keyframes pop{
-
     0%{
         transform:scale(0);
     }
-
     70%{
         transform:scale(1.15);
     }
-
     100%{
         transform:scale(1);
     }
-
 }
-
 
 @media(max-width:600px){
 
@@ -530,12 +365,18 @@ th,td{
         padding:10px;
     }
 
+    header{
+        padding:15px;
+    }
+
+    header h1{
+        font-size:22px;
+    }
+
 }
 
 </style>
-
 </head>
-
 
 <body>
 
@@ -546,115 +387,106 @@ LOGIN PAGE
 
 <div id="loginPage">
 
-<div class="loginBox">
+    <div class="loginBox">
 
-<div class="logo">
-📱
-</div>
+        <div class="logo">📱</div>
 
-<h1>
-QR Attendance
-</h1>
+        <h1>QR Attendance</h1>
 
-<p>
-Event Attendance Management System
-</p>
+        <p>Event Attendance Management System</p>
 
 
-<!-- LOGIN -->
+        <!-- LOGIN -->
 
-<div id="loginForm">
+        <div id="loginForm">
 
-<input
-type="text"
-id="username"
-placeholder="Username">
+            <input
+                type="text"
+                id="username"
+                placeholder="Username"
+                autocomplete="username"
+            >
 
+            <input
+                type="password"
+                id="password"
+                placeholder="Password"
+                autocomplete="current-password"
+            >
 
-<input
-type="password"
-id="password"
-placeholder="Password">
+            <button
+                class="red"
+                style="width:100%"
+                onclick="login()"
+            >
+                🔐 Login
+            </button>
 
+            <button
+                class="light"
+                style="width:100%"
+                onclick="showRegister()"
+            >
+                📝 Create Account
+            </button>
 
-<button
-class="red"
-style="width:100%"
-onclick="login()">
-
-🔐 Login
-
-</button>
-
-
-<button
-class="light"
-style="width:100%"
-onclick="showRegister()">
-
-📝 Create Account
-
-</button>
-
-</div>
-
-
-<!-- CREATE ACCOUNT -->
-
-<div
-id="registerForm"
-class="hidden">
-
-<h3>
-Create Account
-</h3>
-
-<p>
-Your account must be approved by an Admin.
-</p>
+        </div>
 
 
-<input
-type="text"
-id="newUsername"
-placeholder="Username">
+        <!-- REGISTER -->
+
+        <div
+            id="registerForm"
+            class="hidden"
+        >
+
+            <h3>Create Account</h3>
+
+            <p>
+                Your account must be approved by an Admin.
+            </p>
+
+            <input
+                type="text"
+                id="newUsername"
+                placeholder="Username"
+                autocomplete="username"
+            >
+
+            <input
+                type="password"
+                id="newPassword"
+                placeholder="Password"
+                autocomplete="new-password"
+            >
+
+            <input
+                type="password"
+                id="confirmPassword"
+                placeholder="Confirm Password"
+                autocomplete="new-password"
+            >
+
+            <button
+                class="red"
+                onclick="registerAccount()"
+            >
+                Create Account
+            </button>
+
+            <button
+                class="light"
+                onclick="showLogin()"
+            >
+                Back to Login
+            </button>
+
+        </div>
 
 
-<input
-type="password"
-id="newPassword"
-placeholder="Password">
+        <p id="message"></p>
 
-
-<input
-type="password"
-id="confirmPassword"
-placeholder="Confirm Password">
-
-
-<button
-class="red"
-onclick="registerAccount()">
-
-Create Account
-
-</button>
-
-
-<button
-class="light"
-onclick="showLogin()">
-
-Back to Login
-
-</button>
-
-</div>
-
-
-<p id="message"></p>
-
-</div>
+    </div>
 
 </div>
 
@@ -666,320 +498,266 @@ MAIN SYSTEM
 
 <div id="system">
 
-
 <header>
 
-<h1>
-📱 QR Event Attendance
-</h1>
+    <h1>📱 QR Event Attendance</h1>
 
+    <div>
 
-<div>
+        <span
+            id="userDisplay"
+            class="userBadge">
+        </span>
 
-<span
-id="userDisplay"
-class="userBadge">
-</span>
+        <button
+            class="dark"
+            onclick="logout()"
+        >
+            Logout
+        </button>
 
-
-<button
-class="dark"
-onclick="logout()">
-
-Logout
-
-</button>
-
-</div>
+    </div>
 
 </header>
-
 
 
 <div class="container">
 
 
-<!-- DASHBOARD -->
+    <!-- DASHBOARD -->
 
-<div class="dashboard">
+    <div class="dashboard">
 
-<div class="stat">
+        <div class="stat">
 
-<div>
-👨‍🎓
-</div>
+            <div>👨‍🎓</div>
 
-<div
-class="number"
-id="studentCount">
-0
-</div>
+            <div
+                class="number"
+                id="studentCount"
+            >
+                0
+            </div>
 
-Registered Students
+            Registered Students
 
-</div>
+        </div>
 
 
-<div class="stat">
+        <div class="stat">
 
-<div>
-📋
-</div>
+            <div>📋</div>
 
-<div
-class="number"
-id="attendanceCount">
-0
-</div>
+            <div
+                class="number"
+                id="attendanceCount"
+            >
+                0
+            </div>
 
-Attendance
+            Attendance
 
-</div>
+        </div>
 
-</div>
+    </div>
 
 
 
-<!-- EVENT -->
+    <!-- EVENT -->
 
-<div class="card">
+    <div class="card">
 
-<h2>
-🎪 Event Information
-</h2>
+        <h2>🎪 Event Information</h2>
 
-<label>
-Event Name
-</label>
+        <label>Event Name</label>
 
-<input
-type="text"
-id="eventName"
-value="School Seminar 2026">
+        <input
+            type="text"
+            id="eventName"
+            value="School Seminar 2026"
+        >
 
-</div>
+    </div>
 
 
 
-<!-- ==================================================
-ADMIN STUDENT REGISTRATION
-================================================== -->
+    <!-- ADMIN STUDENT REGISTRATION -->
 
-<div
-class="card"
-id="studentSection">
+    <div
+        class="card"
+        id="studentSection"
+    >
 
-<h2>
-👨‍🎓 Register Student
-</h2>
+        <h2>👨‍🎓 Register Student</h2>
 
-<p>
-Enter the Student ID and Name.
-The system automatically generates the QR code.
-</p>
+        <p>
+            Enter the Student ID and Name.
+            The system automatically generates the QR code.
+        </p>
 
+        <div class="formGrid">
 
-<div class="formGrid">
+            <div>
 
-<div>
+                <label>Student ID</label>
 
-<label>
-Student ID
-</label>
+                <input
+                    type="text"
+                    id="studentID"
+                    placeholder="C2425-00031"
+                >
 
-<input
-type="text"
-id="studentID"
-placeholder="C2425-00031">
+            </div>
 
-</div>
 
+            <div>
 
-<div>
+                <label>Student Name</label>
 
-<label>
-Student Name
-</label>
+                <input
+                    type="text"
+                    id="studentName"
+                    placeholder="Juan Dela Cruz"
+                >
 
-<input
-type="text"
-id="studentName"
-placeholder="Juan Dela Cruz">
+            </div>
 
-</div>
+        </div>
 
-</div>
 
+        <button
+            class="red"
+            onclick="registerStudent()"
+        >
+            🔲 Generate QR
+        </button>
 
-<button
-class="red"
-onclick="registerStudent()">
+        <p id="studentMessage"></p>
 
-🔲 Generate QR
+    </div>
 
-</button>
 
 
-<p id="studentMessage"></p>
+    <!-- QR CODES -->
 
-</div>
+    <div class="card">
 
+        <h2>🔲 Student QR Codes</h2>
 
+        <div
+            id="studentQR"
+            class="studentGrid"
+        ></div>
 
-<!-- QR CODES -->
+    </div>
 
-<div class="card">
 
-<h2>
-🔲 Student QR Codes
-</h2>
 
-<div
-id="studentQR"
-class="studentGrid">
-</div>
+    <!-- SCANNER -->
 
-</div>
+    <div class="card">
 
+        <h2>📷 Scan Attendance</h2>
 
+        <p>
+            Allow camera permission, then scan the student's QR code.
+        </p>
 
-<!-- ==================================================
-SCANNER
-================================================== -->
+        <div id="reader"></div>
 
-<div class="card">
+        <div
+            id="scannerStatus"
+            class="scannerStatus"
+        >
+            Ready to scan.
+        </div>
 
-<h2>
-📷 Scan Attendance
-</h2>
+        <div style="text-align:center">
 
-<p>
-Allow camera permission, then scan the student's QR code.
-</p>
+            <button
+                class="red"
+                onclick="startScanner()"
+            >
+                📷 Start Scanner
+            </button>
 
+            <button
+                class="dark"
+                onclick="stopScanner()"
+            >
+                ⛔ Stop Scanner
+            </button>
 
-<div id="reader"></div>
+        </div>
 
+    </div>
 
-<div
-id="scannerStatus"
-class="scannerStatus">
 
-Ready to scan.
 
-</div>
+    <!-- ATTENDANCE RECORDS -->
 
+    <div class="card">
 
-<div style="text-align:center">
+        <h2>📋 Attendance Records</h2>
 
-<button
-class="red"
-onclick="startScanner()">
+        <input
+            type="text"
+            id="search"
+            placeholder="🔎 Search attendance..."
+            onkeyup="displayAttendance()"
+        >
 
-📷 Start Scanner
+        <div class="table">
 
-</button>
+            <table>
 
+                <thead>
 
-<button
-class="dark"
-onclick="stopScanner()">
+                    <tr>
 
-⛔ Stop Scanner
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Event</th>
+                        <th>Date</th>
+                        <th>Time</th>
+                        <th>Status</th>
+                        <th>Scanned By</th>
 
-</button>
+                    </tr>
 
-</div>
+                </thead>
 
-</div>
+                <tbody id="attendanceTable"></tbody>
 
+            </table>
 
+        </div>
 
-<!-- ==================================================
-ATTENDANCE RECORDS
-================================================== -->
+    </div>
 
-<div class="card">
 
-<h2>
-📋 Attendance Records
-</h2>
 
+    <!-- ADMIN PERMISSION -->
 
-<input
-type="text"
-id="search"
-placeholder="🔎 Search attendance..."
-onkeyup="displayAttendance()">
+    <div
+        class="card"
+        id="adminPanel"
+    >
 
+        <h2>👑 Account Permissions</h2>
 
-<div class="table">
+        <p>
+            New users must be approved before they can log in.
+        </p>
 
-<table>
+        <div id="pendingUsers">
+            Login as Admin to manage accounts.
+        </div>
 
-<thead>
-
-<tr>
-
-<th>ID</th>
-
-<th>Name</th>
-
-<th>Event</th>
-
-<th>Date</th>
-
-<th>Time</th>
-
-<th>Status</th>
-
-<th>Scanned By</th>
-
-</tr>
-
-</thead>
-
-
-<tbody
-id="attendanceTable">
-</tbody>
-
-</table>
-
-</div>
-
-</div>
-
-
-
-<!-- ==================================================
-ADMIN PERMISSION
-================================================== -->
-
-<div
-class="card"
-id="adminPanel">
-
-<h2>
-👑 Account Permissions
-</h2>
-
-<p>
-New users must be approved before they can log in.
-</p>
-
-
-<div id="pendingUsers">
-
-Loading...
-
-</div>
-
-</div>
+    </div>
 
 
 </div>
-
 </div>
 
 
@@ -990,657 +768,96 @@ SUCCESS POPUP
 
 <div id="popup">
 
-<div class="popupBox">
+    <div class="popupBox">
 
-<div class="checkCircle">
+        <div class="checkCircle">
 
-<div class="check">
-✓
-</div>
+            <div class="check">
+                ✓
+            </div>
 
-</div>
+        </div>
 
+        <h2>Attendance Recorded!</h2>
 
-<h2>
-Attendance Recorded!
-</h2>
+        <h3 id="successName"></h3>
 
+        <p id="successDetails"></p>
 
-<h3 id="successName">
-</h3>
+        <button
+            class="red"
+            onclick="closePopup()"
+        >
+            OK
+        </button>
 
-
-<p id="successDetails">
-</p>
-
-
-<button
-class="red"
-onclick="closePopup()">
-
-OK
-
-</button>
-
-</div>
+    </div>
 
 </div>
 
 
+
+<!-- ==================================================
+ONE JAVASCRIPT SECTION ONLY
+================================================== -->
 
 <script>
 
-
 /* ==================================================
 GOOGLE APPS SCRIPT URL
-==================================================
 ================================================== */
 
 const APPS_SCRIPT_URL =
 "https://script.google.com/macros/s/AKfycbxg6uuv7fPItn6XvNvCLZ3tbAf0rxRfootS2c-n6pa5YUkB6tsZsnFS_dHrZgysdjeDpg/exec";
 
-/* STUDENTS */
-const students = [
-  {id:"STU001", name:"Juan Dela Cruz"},
-  {id:"STU002", name:"Maria Santos"},
-  {id:"STU003", name:"Pedro Reyes"},
-  {id:"STU004", name:"Ana Garcia"},
-  {id:"STU005", name:"Mark Lopez"},
-  {id:"STU006", name:"Sofia Ramos"}
+
+/* ==================================================
+DEFAULT STUDENTS
+================================================== */
+
+const defaultStudents = [
+
+    {id:"STU001",name:"Juan Dela Cruz"},
+
+    {id:"STU002",name:"Maria Santos"},
+
+    {id:"STU003",name:"Pedro Reyes"},
+
+    {id:"STU004",name:"Ana Garcia"},
+
+    {id:"STU005",name:"Mark Lopez"},
+
+    {id:"STU006",name:"Sofia Ramos"}
+
 ];
 
 
-let scanner = null;
-let running = false;
-let lastId = "";
-let lastTime = 0;
-
-
-/* =========================
-   GENERATE QR CODES
-========================= */
-
-function generateQR(){
-
-  const box = document.getElementById("qrs");
-
-  box.innerHTML = "";
-
-  students.forEach(student => {
-
-    const card = document.createElement("div");
-
-    card.className = "student";
-
-    card.innerHTML = `
-      <b>${safe(student.name)}</b><br>
-      ID: ${safe(student.id)}
-
-      <div
-        class="qr"
-        id="qr_${student.id}">
-      </div>
-
-      <small>Scan for attendance</small>
-    `;
-
-    box.appendChild(card);
-
-    new QRCode(
-      document.getElementById("qr_" + student.id),
-      {
-        text: student.id,
-        width: 150,
-        height: 150
-      }
-    );
-
-  });
-
-}
-
-
-/* =========================
-   START SCANNER
-========================= */
-
-function startScanner(){
-
-  if(running) return;
-
-  scanner = new Html5Qrcode("reader");
-
-  scanner.start(
-
-    {facingMode:"environment"},
-
-    {
-      fps:10,
-      qrbox:{
-        width:250,
-        height:250
-      }
-    },
-
-    text => processScan(text),
-
-    () => {}
-
-  )
-  .then(() => {
-
-    running = true;
-
-    setStatus(
-      "📷 Camera started. Scan a QR code.",
-      ""
-    );
-
-  })
-
-  .catch(error => {
-
-    console.error(error);
-
-    setStatus(
-      "❌ Camera failed. Allow camera permission and use HTTPS.",
-      "error"
-    );
-
-  });
-
-}
-
-
-/* =========================
-   STOP SCANNER
-========================= */
-
-function stopScanner(){
-
-  if(scanner && running){
-
-    scanner.stop()
-      .then(() => {
-
-        scanner.clear();
-
-        running = false;
-
-        setStatus(
-          "Scanner stopped.",
-          ""
-        );
-
-      })
-      .catch(error => {
-
-        console.error(error);
-
-      });
-
-  }
-
-}
-
-
-/* =========================
-   PROCESS QR SCAN
-========================= */
-
-function processScan(raw){
-
-  const id = raw.trim();
-
-  const now = Date.now();
-
-
-  /* Prevent repeated scans */
-  if(
-    id === lastId &&
-    now - lastTime < 5000
-  ){
-
-    return;
-
-  }
-
-
-  lastId = id;
-  lastTime = now;
-
-
-  /* Find student */
-  const student =
-    students.find(
-      s => s.id === id
-    );
-
-
-  if(!student){
-
-    setStatus(
-      "❌ Unregistered Student ID: " + id,
-      "error"
-    );
-
-    return;
-
-  }
-
-
-  /* Get event */
-  const event =
-    document
-      .getElementById("event")
-      .value
-      .trim();
-
-
-  if(!event){
-
-    setStatus(
-      "❌ Enter the active event first.",
-      "error"
-    );
-
-    return;
-
-  }
-
-
-  /* Current date and time */
-  const d = new Date();
-
-
-  const record = {
-
-    id: student.id,
-
-    name: student.name,
-
-    event: event,
-
-    date:
-      d.toLocaleDateString("en-US"),
-
-    time:
-      d.toLocaleTimeString(
-        "en-US",
-        {
-          hour:"numeric",
-          minute:"2-digit"
-        }
-      ),
-
-    status:"Present",
-
-    scannedBy:"Staff"
-
-  };
-
-
-  /* Save locally first */
-  if(!saveLocal(record)){
-
-    return;
-
-  }
-
-
-  /* SEND TO GOOGLE SHEETS */
-  sendAttendanceToGoogle(record);
-
-
-  /* SUCCESS */
-  showScanSuccess(student);
-
-}
-
-
-/* =========================
-   LOCAL STORAGE
-========================= */
-
-function saveLocal(record){
-
-  const list =
-    JSON.parse(
-      localStorage.getItem("attendance") || "[]"
-    );
-
-
-  /* Duplicate check */
-
-  if(
-    list.some(
-      x =>
-        x.id === record.id &&
-        x.event.toLowerCase() ===
-        record.event.toLowerCase()
-    )
-  ){
-
-    setStatus(
-      "⚠️ Already recorded for this event.",
-      "error"
-    );
-
-    return false;
-
-  }
-
-
-  list.push(record);
-
-  localStorage.setItem(
-    "attendance",
-    JSON.stringify(list)
-  );
-
-
-  renderRows();
-
-  return true;
-
-}
-
-
-/* =========================
-   SEND ATTENDANCE TO GOOGLE
-========================= */
-
-function sendAttendanceToGoogle(data){
-
-  if(
-    !APPS_SCRIPT_URL ||
-    APPS_SCRIPT_URL.includes("PASTE_YOUR")
-  ){
-
-    setStatus(
-      "✓ Saved locally. Apps Script URL is missing.",
-      "error"
-    );
-
-    return;
-
-  }
-
-
-  const url =
-    APPS_SCRIPT_URL +
-
-    "?action=attendance" +
-
-    "&id=" +
-    encodeURIComponent(data.id) +
-
-    "&name=" +
-    encodeURIComponent(data.name) +
-
-    "&event=" +
-    encodeURIComponent(data.event) +
-
-    "&date=" +
-    encodeURIComponent(data.date) +
-
-    "&time=" +
-    encodeURIComponent(data.time) +
-
-    "&status=" +
-    encodeURIComponent(data.status) +
-
-    "&scannedBy=" +
-    encodeURIComponent(data.scannedBy || "") +
-
-    "&callback=attendanceCallback";
-
-
-  /*
-    JSONP request.
-
-    This works even when your HTML
-    is hosted on another website.
-  */
-
-  const script =
-    document.createElement("script");
-
-
-  script.src = url;
-
-
-  script.onerror = function(){
-
-    setStatus(
-      "⚠️ Saved locally, but Google Sheets could not be reached.",
-      "error"
-    );
-
-  };
-
-
-  document.body.appendChild(script);
-
-
-  /*
-    Remove script after a few seconds.
-  */
-
-  setTimeout(() => {
-
-    if(script.parentNode){
-
-      script.parentNode.removeChild(script);
-
-    }
-
-  }, 10000);
-
-}
-
-
-/* =========================
-   GOOGLE RESPONSE
-========================= */
-
-function attendanceCallback(response){
-
-  console.log(
-    "Apps Script response:",
-    response
-  );
-
-
-  if(response && response.success){
-
-    setStatus(
-      "✓ " +
-      response.message,
-      "success"
-    );
-
-  }
-
-  else{
-
-    setStatus(
-      "⚠️ Google Sheets error: " +
-      (response.message || "Unknown error"),
-      "error"
-    );
-
-  }
-
-}
-
-
-/* =========================
-   SUCCESS DISPLAY
-========================= */
-
-function showScanSuccess(student){
-
-  setStatus(
-    "✅ " +
-    student.name +
-    " marked PRESENT!",
-    "success"
-  );
-
-
-  /*
-    Optional visual effect
-    on scanner area.
-  */
-
-  const reader =
-    document.getElementById("reader");
-
-
-  reader.style.border =
-    "5px solid #28a745";
-
-
-  reader.style.borderRadius =
-    "15px";
-
-
-  setTimeout(() => {
-
-    reader.style.border =
-      "";
-
-  }, 1500);
-
-}
-
-
-/* =========================
-   DISPLAY LOCAL RECORDS
-========================= */
-
-function renderRows(){
-
-  const list =
-    JSON.parse(
-      localStorage.getItem("attendance") || "[]"
-    );
-
-
-  document.getElementById("rows").innerHTML =
-
-    list.map(record => `
-
-      <tr>
-
-        <td>
-          ${safe(record.id)}
-        </td>
-
-        <td>
-          ${safe(record.name)}
-        </td>
-
-        <td>
-          ${safe(record.event)}
-        </td>
-
-        <td>
-          ${safe(record.date)}
-        </td>
-
-        <td>
-          ${safe(record.time)}
-        </td>
-
-        <td>
-          ${safe(record.status)}
-        </td>
-
-      </tr>
-
-    `).join("");
-
-}
-
-
-/* =========================
-   STATUS MESSAGE
-========================= */
-
-function setStatus(text, className){
-
-  const element =
-    document.getElementById("status");
-
-
-  element.textContent = text;
-
-
-  element.className =
-    "status " + className;
-
-}
-
-
-/* =========================
-   SECURITY / HTML SAFE
-========================= */
-
-function safe(value){
-
-  return String(value).replace(
-    /[&<>"']/g,
-
-    function(match){
-
-      return {
-
-        "&":"&amp;",
-
-        "<":"&lt;",
-
-        ">":"&gt;",
-
-        '"':"&quot;",
-
-        "'":"&#039;"
-
-      }[match];
-
-    }
-
-  );
-
-}
-
-
-/* =========================
-   INITIALIZE
-========================= */
-
-generateQR();
-
-renderRows();
-
-</script>
-
-<script>
 /* ==================================================
-LOCAL CACHE
+LOCAL DATA
 ================================================== */
 
 let students =
-JSON.parse(
-localStorage.getItem("students") || "[]"
-);
+    JSON.parse(
+        localStorage.getItem("students") || "null"
+    );
+
+
+if(!Array.isArray(students)){
+
+    students = defaultStudents;
+
+    localStorage.setItem(
+        "students",
+        JSON.stringify(students)
+    );
+
+}
 
 
 let attendance =
-JSON.parse(
-localStorage.getItem("attendance") || "[]"
-);
+    JSON.parse(
+        localStorage.getItem("attendance") || "[]"
+    );
 
 
 let currentUser = null;
@@ -1652,1457 +869,25 @@ let scanning = false;
 let scanLocked = false;
 
 
-
 /* ==================================================
-CHECK CONNECTION
+HTML SECURITY
 ================================================== */
 
-function checkURL(){
+function escapeHTML(text){
 
-if(
-APPS_SCRIPT_URL.includes(
-"PASTE_YOUR"
-)
-){
+    return String(text)
 
-alert(
-"Please connect your Google Apps Script URL first."
-);
+        .replace(/&/g,"&amp;")
 
-return false;
+        .replace(/</g,"&lt;")
 
-}
-
-return true;
-
-}
-
-
-
-/* ==================================================
-API CONNECTION
-================================================== */
-
-async function api(action,params={}){
-
-if(!checkURL()){
-
-throw new Error(
-"Apps Script URL not configured."
-);
-
-}
-
-
-const query =
-new URLSearchParams({
-
-action:action,
-
-...params
-
-});
-
-
-const response =
-await fetch(
-
-APPS_SCRIPT_URL +
-"?" +
-query.toString(),
-
-{
-
-method:"GET",
-
-cache:"no-store"
-
-}
-
-);
-
-
-if(!response.ok){
-
-throw new Error(
-"Server error."
-);
-
-}
-
-
-return await response.json();
-
-}
-
-
-
-/* ==================================================
-SHOW LOGIN
-================================================== */
-
-function showLogin(){
-
-document
-.getElementById("loginForm")
-.classList
-.remove("hidden");
-
-
-document
-.getElementById("registerForm")
-.classList
-.add("hidden");
-
-
-document
-.getElementById("message")
-.innerHTML="";
-
-}
-
-
-
-/* ==================================================
-SHOW REGISTER
-================================================== */
-
-function showRegister(){
-
-document
-.getElementById("loginForm")
-.classList
-.add("hidden");
-
-
-document
-.getElementById("registerForm")
-.classList
-.remove("hidden");
-
-
-document
-.getElementById("message")
-.innerHTML="";
-
-}
-
-
-
-/* ==================================================
-REGISTER ACCOUNT
-================================================== */
-
-async function registerAccount(){
-
-const username =
-document
-.getElementById("newUsername")
-.value
-.trim();
-
-
-const password =
-document
-.getElementById("newPassword")
-.value;
-
-
-const confirm =
-document
-.getElementById("confirmPassword")
-.value;
-
-
-if(!username || !password || !confirm){
-
-showMessage(
-"❌ Please complete all fields."
-);
-
-return;
-
-}
-
-
-if(password.length < 4){
-
-showMessage(
-"❌ Password must be at least 4 characters."
-);
-
-return;
-
-}
-
-
-if(password !== confirm){
-
-showMessage(
-"❌ Passwords do not match."
-);
-
-return;
-
-}
-
-
-try{
-
-showMessage(
-"⏳ Creating account..."
-);
-
-
-const result =
-await api(
-
-"register",
-
-{
-
-username:username,
-
-password:password
-
-}
-
-);
-
-
-if(result.success){
-
-showMessage(
-"✅ Account created! Wait for Admin approval."
-);
-
-
-document
-.getElementById("newUsername")
-.value="";
-
-
-document
-.getElementById("newPassword")
-.value="";
-
-
-document
-.getElementById("confirmPassword")
-.value="";
-
-}
-
-else{
-
-showMessage(
-"❌ " +
-result.message
-);
-
-}
-
-}
-
-catch(error){
-
-console.error(error);
-
-showMessage(
-"❌ Unable to connect to the online database."
-);
-
-}
-
-}
-
-
-
-/* ==================================================
-LOGIN
-================================================== */
-
-async function login(){
-
-const username =
-document
-.getElementById("username")
-.value
-.trim();
-
-
-const password =
-document
-.getElementById("password")
-.value;
-
-
-if(!username || !password){
-
-showMessage(
-"❌ Enter username and password."
-);
-
-return;
-
-}
-
-
-try{
-
-showMessage(
-"⏳ Checking account..."
-);
-
-
-const result =
-await api(
-
-"login",
-
-{
-
-username:username,
-
-password:password
-
-}
-
-);
-
-
-if(!result.success){
-
-showMessage(
-"❌ " +
-result.message
-);
-
-return;
-
-}
-
-
-currentUser = {
-
-username:result.username,
-
-role:result.role
-
-};
-
-
-document
-.getElementById("loginPage")
-.style.display="none";
-
-
-document
-.getElementById("system")
-.style.display="block";
-
-
-document
-.getElementById("userDisplay")
-.innerHTML =
-
-escapeHTML(
-result.username
-) +
-
-" • " +
-
-escapeHTML(
-result.role
-);
-
-
-
-/* ADMIN */
-
-if(result.role === "Admin"){
-
-document
-.getElementById("adminPanel")
-.style.display="block";
-
-
-document
-.getElementById("studentSection")
-.style.display="block";
-
-
-loadPendingUsers();
-
-}
-
-else{
-
-document
-.getElementById("adminPanel")
-.style.display="none";
-
-
-document
-.getElementById("studentSection")
-.style.display="none";
-
-}
-
-
-displayStudents();
-
-displayAttendance();
-
-updateDashboard();
-
-}
-
-catch(error){
-
-console.error(error);
-
-showMessage(
-"❌ Cannot connect to Google Apps Script."
-);
-
-}
-
-}
-
-
-
-/* ==================================================
-REGISTER STUDENT
-================================================== */
-
-async function registerStudent(){
-
-if(
-!currentUser ||
-currentUser.role !== "Admin"
-){
-
-alert(
-"Only Admin can register students."
-);
-
-return;
-
-}
-
-
-const id =
-document
-.getElementById("studentID")
-.value
-.trim();
-
-
-const name =
-document
-.getElementById("studentName")
-.value
-.trim();
-
-
-if(!id || !name){
-
-document
-.getElementById("studentMessage")
-.innerHTML =
-"❌ Enter Student ID and Name.";
-
-return;
-
-}
-
-
-if(
-students.some(
-s => s.id === id
-)
-){
-
-document
-.getElementById("studentMessage")
-.innerHTML =
-"⚠️ Student already exists.";
-
-return;
-
-}
-
-
-const student = {
-
-id:id,
-
-name:name,
-
-qr:id
-
-};
-
-
-/* SAVE LOCAL */
-
-students.push(student);
-
-localStorage.setItem(
-"students",
-JSON.stringify(students)
-);
-
-
-/* SAVE ONLINE */
-
-try{
-
-const result =
-await api(
-
-"student",
-
-{
-
-id:id,
-
-name:name,
-
-qr:id
-
-}
-
-);
-
-
-if(!result.success){
-
-document
-.getElementById("studentMessage")
-.innerHTML =
-"⚠️ " + result.message;
-
-return;
-
-}
-
-}
-
-catch(error){
-
-console.error(error);
-
-document
-.getElementById("studentMessage")
-.innerHTML =
-"⚠️ Saved locally, but online save failed.";
-
-}
-
-
-/* GENERATE QR */
-
-createQR(student);
-
-
-document
-.getElementById("studentID")
-.value="";
-
-
-document
-.getElementById("studentName")
-.value="";
-
-
-document
-.getElementById("studentMessage")
-.innerHTML =
-"✅ Student registered and QR generated!";
-
-
-updateDashboard();
-
-}
-
-
-
-/* ==================================================
-CREATE QR
-================================================== */
-
-function createQR(student){
-
-const card =
-document.createElement("div");
-
-
-card.className="student";
-
-
-const qrID =
-"qr_" +
-Date.now() +
-"_" +
-Math.random()
-.toString(36)
-.substring(2);
-
-
-card.innerHTML = `
-
-<h3>
-${escapeHTML(student.name)}
-</h3>
-
-<p>
-Student ID:
-<b>
-${escapeHTML(student.id)}
-</b>
-</p>
-
-<div
-class="qr"
-id="${qrID}">
-</div>
-
-<p>
-📱 Scan Me
-</p>
-
-`;
-
-
-document
-.getElementById("studentQR")
-.appendChild(card);
-
-
-new QRCode(
-
-document.getElementById(qrID),
-
-{
-
-text:student.id,
-
-width:170,
-
-height:170,
-
-correctLevel:
-QRCode.CorrectLevel.H
-
-}
-
-);
-
-}
-
-
-
-/* ==================================================
-DISPLAY STUDENTS
-================================================== */
-
-function displayStudents(){
-
-const container =
-document
-.getElementById("studentQR");
-
-
-container.innerHTML="";
-
-
-students.forEach(
-student => {
-
-createQR(student);
-
-}
-
-);
-
-}
-
-
-
-/* ==================================================
-START SCANNER
-================================================== */
-
-function startScanner(){
-
-if(scanning){
-
-return;
-
-}
-
-
-if(
-typeof Html5Qrcode ===
-"undefined"
-){
-
-document
-.getElementById("scannerStatus")
-.innerHTML =
-"❌ Scanner library did not load.";
-
-return;
-
-}
-
-
-scanner =
-new Html5Qrcode("reader");
-
-
-scanLocked=false;
-
-
-scanner.start(
-
-{
-
-facingMode:
-"environment"
-
-},
-
-{
-
-fps:10,
-
-qrbox:{
-
-width:250,
-
-height:250
-
-}
-
-},
-
-function(decodedText){
-
-if(scanLocked){
-
-return;
-
-}
-
-
-scanLocked=true;
-
-
-/* GREEN BORDER */
-
-document
-.getElementById("reader")
-.classList
-.add("detected");
-
-
-document
-.getElementById("scannerStatus")
-.innerHTML =
-"🟢 QR CODE DETECTED!";
-
-
-processAttendance(decodedText);
-
-},
-
-function(error){
-
-/* Ignore normal scan errors */
-
-}
-
-)
-
-.then(function(){
-
-scanning=true;
-
-
-document
-.getElementById("scannerStatus")
-.innerHTML =
-"📷 Scanner active. Point camera at QR code.";
-
-})
-
-.catch(function(error){
-
-console.error(error);
-
-
-document
-.getElementById("scannerStatus")
-.innerHTML =
-"❌ Camera permission required. Please allow camera access.";
-
-});
-
-}
-
-
-
-/* ==================================================
-STOP SCANNER
-================================================== */
-
-function stopScanner(){
-
-if(
-scanner &&
-scanning
-){
-
-scanner.stop()
-
-.then(function(){
-
-scanner.clear();
-
-scanner=null;
-
-scanning=false;
-
-})
-
-.catch(function(error){
-
-console.log(error);
-
-});
-
-}
-
-
-document
-.getElementById("reader")
-.classList
-.remove("detected");
-
-
-document
-.getElementById("scannerStatus")
-.innerHTML =
-"Scanner stopped.";
-
-
-scanLocked=false;
-
-}
-
-
-
-/* ==================================================
-PROCESS ATTENDANCE
-================================================== */
-
-async function processAttendance(studentID){
-
-const student =
-students.find(
-s => s.id === studentID
-);
-
-
-if(!student){
-
-document
-.getElementById("scannerStatus")
-.innerHTML =
-"❌ Student is not registered.";
-
-scanLocked=false;
-
-return;
-
-}
-
-
-const event =
-document
-.getElementById("eventName")
-.value
-.trim();
-
-
-if(!event){
-
-alert(
-"Please enter the event name first."
-);
-
-scanLocked=false;
-
-return;
+        .replace(/>/g,"&gt;")
 
-}
-
-
-/* DUPLICATE */
-
-const duplicate =
-attendance.some(
-
-r =>
-r.id === student.id &&
-r.event === event
-
-);
-
-
-if(duplicate){
-
-document
-.getElementById("scannerStatus")
-.innerHTML =
-"⚠️ Student already recorded.";
-
-scanLocked=false;
-
-return;
-
-}
-
-
-const now =
-new Date();
-
-
-const record = {
-
-id:student.id,
-
-name:student.name,
-
-event:event,
-
-date:
-now.toLocaleDateString(),
-
-time:
-now.toLocaleTimeString(),
-
-status:"Present",
-
-scannedBy:
-currentUser
-? currentUser.username
-: "Unknown"
-
-};
-
-
-/* LOCAL */
-
-attendance.push(record);
-
-localStorage.setItem(
-"attendance",
-JSON.stringify(attendance)
-);
-
-
-/* ONLINE */
-
-try{
-
-await api(
-
-"attendance",
-
-{
-
-id:record.id,
-
-name:record.name,
-
-event:record.event,
-
-date:record.date,
-
-time:record.time,
-
-status:record.status,
-
-scannedBy:record.scannedBy
-
-}
-
-);
-
-}
-
-catch(error){
-
-console.error(error);
-
-console.log(
-"Online save failed. Local copy retained."
-);
-
-}
-
-
-/* DISPLAY */
-
-displayAttendance();
-
-updateDashboard();
-
-
-showSuccess(
-student,
-record
-);
-
-
-/* STOP AFTER SCAN */
-
-setTimeout(
-function(){
-
-stopScanner();
-
-},
-1000
-);
-
-}
-
-
-
-/* ==================================================
-SUCCESS
-================================================== */
-
-function showSuccess(student,record){
-
-document
-.getElementById("successName")
-.innerHTML =
-escapeHTML(student.name);
-
-
-document
-.getElementById("successDetails")
-.innerHTML =
-
-"Student ID: <b>" +
-escapeHTML(student.id) +
-"</b><br><br>" +
-
-"Event: " +
-escapeHTML(record.event) +
-
-"<br>" +
-
-"Date: " +
-escapeHTML(record.date) +
-
-"<br>" +
-
-"Time: " +
-escapeHTML(record.time);
-
-
-document
-.getElementById("popup")
-.style.display="flex";
-
-}
-
-
-function closePopup(){
-
-document
-.getElementById("popup")
-.style.display="none";
-
-
-document
-.getElementById("scannerStatus")
-.innerHTML =
-"Ready for next scan.";
-
-scanLocked=false;
-
-}
-
-
-
-/* ==================================================
-ATTENDANCE TABLE
-================================================== */
-
-function displayAttendance(){
-
-const table =
-document
-.getElementById("attendanceTable");
-
-
-const search =
-document
-.getElementById("search")
-.value
-.toLowerCase();
-
-
-table.innerHTML="";
-
-
-const filtered =
-attendance.filter(
-
-r =>
-
-String(r.id)
-.toLowerCase()
-.includes(search)
-
-||
-
-String(r.name)
-.toLowerCase()
-.includes(search)
-
-||
-
-String(r.event)
-.toLowerCase()
-.includes(search)
-
-);
-
-
-if(filtered.length === 0){
-
-table.innerHTML = `
-
-<tr>
-
-<td
-colspan="7"
-style="text-align:center">
-
-No attendance records.
-
-</td>
-
-</tr>
-
-`;
-
-return;
-
-}
-
-
-filtered
-.slice()
-.reverse()
-.forEach(
-
-r => {
-
-const row =
-document.createElement("tr");
-
-
-row.innerHTML = `
-
-<td>
-${escapeHTML(r.id)}
-</td>
-
-<td>
-${escapeHTML(r.name)}
-</td>
+        .replace(/"/g,"&quot;")
 
-<td>
-${escapeHTML(r.event)}
-</td>
+        .replace(/'/g,"&#039;");
 
-<td>
-${escapeHTML(r.date)}
-</td>
-
-<td>
-${escapeHTML(r.time)}
-</td>
-
-<td
-style="color:#28a745;font-weight:bold">
-
-✓ Present
-
-</td>
-
-<td>
-${escapeHTML(r.scannedBy)}
-</td>
-
-`;
-
-
-table.appendChild(row);
-
-}
-
-);
-
-}
-
-
-
-/* ==================================================
-ADMIN: LOAD PENDING ACCOUNTS
-================================================== */
-
-async function loadPendingUsers(){
-
-const container =
-document
-.getElementById("pendingUsers");
-
-
-container.innerHTML =
-"⏳ Loading accounts...";
-
-
-try{
-
-const result =
-await api("pending");
-
-
-container.innerHTML="";
-
-
-if(
-!result.users ||
-result.users.length === 0
-){
-
-container.innerHTML =
-"✅ No pending accounts.";
-
-return;
-
-}
-
-
-result.users.forEach(
-
-user => {
-
-const div =
-document.createElement("div");
-
-
-div.className =
-"pendingUser";
-
-
-const username =
-String(user.username);
-
-
-div.innerHTML = `
-
-<b>
-👤 ${escapeHTML(username)}
-</b>
-
-<br>
-
-Status:
-<span style="color:#d9534f">
-Pending
-</span>
-
-<br><br>
-
-<button
-class="red"
-onclick="approveUser('${encodeURIComponent(username)}')">
-
-✓ Give Permission
-
-</button>
-
-`;
-
-
-container.appendChild(div);
-
-}
-
-);
-
-}
-
-catch(error){
-
-console.error(error);
-
-container.innerHTML =
-"❌ Unable to load accounts.";
-
-}
-
-}
-
-
-
-/* ==================================================
-ADMIN: APPROVE ACCOUNT
-================================================== */
-
-async function approveUser(encodedUsername){
-
-if(
-!currentUser ||
-currentUser.role !== "Admin"
-){
-
-alert(
-"Admin permission required."
-);
-
-return;
-
-}
-
-
-const username =
-decodeURIComponent(
-encodedUsername
-);
-
-
-if(
-!confirm(
-"Give permission to " +
-username +
-"?"
-)
-){
-
-return;
-
-}
-
-
-try{
-
-const result =
-await api(
-
-"approve",
-
-{
-
-username:username
-
-}
-
-);
-
-
-alert(
-result.message
-);
-
-
-loadPendingUsers();
-
-}
-
-catch(error){
-
-console.error(error);
-
-alert(
-"❌ Unable to approve account."
-);
-
-}
-
-}
-
-
-
-/* ==================================================
-DASHBOARD
-================================================== */
-
-function updateDashboard(){
-
-document
-.getElementById("studentCount")
-.innerHTML =
-students.length;
-
-
-document
-.getElementById("attendanceCount")
-.innerHTML =
-attendance.length;
-
-}
-
-
-
-/* ==================================================
-LOGOUT
-================================================== */
-
-function logout(){
-
-stopScanner();
-
-
-currentUser=null;
-
-
-document
-.getElementById("system")
-.style.display="none";
-
-
-document
-.getElementById("loginPage")
-.style.display="flex";
-
-
-document
-.getElementById("username")
-.value="";
-
-
-document
-.getElementById("password")
-.value="";
-
-
-showLogin();
-
 }
-
 
 
 /* ==================================================
@@ -3111,44 +896,1551 @@ MESSAGE
 
 function showMessage(text){
 
-document
-.getElementById("message")
-.innerHTML=text;
+    document
+        .getElementById("message")
+        .innerHTML = text;
 
 }
 
 
-
 /* ==================================================
-HTML SECURITY
+SHOW LOGIN
 ================================================== */
 
-function escapeHTML(text){
+function showLogin(){
 
-return String(text)
+    document
+        .getElementById("loginForm")
+        .classList
+        .remove("hidden");
 
-.replace(/&/g,"&amp;")
 
-.replace(/</g,"&lt;")
+    document
+        .getElementById("registerForm")
+        .classList
+        .add("hidden");
 
-.replace(/>/g,"&gt;")
 
-.replace(/"/g,"&quot;")
-
-.replace(/'/g,"&#039;");
+    showMessage("");
 
 }
 
 
+/* ==================================================
+SHOW REGISTER
+================================================== */
+
+function showRegister(){
+
+    document
+        .getElementById("loginForm")
+        .classList
+        .add("hidden");
+
+
+    document
+        .getElementById("registerForm")
+        .classList
+        .remove("hidden");
+
+
+    showMessage("");
+
+}
+
 
 /* ==================================================
-START
+API CONNECTION
 ================================================== */
+
+function api(action,params={}){
+
+    return new Promise(function(resolve,reject){
+
+        if(
+            !APPS_SCRIPT_URL ||
+            APPS_SCRIPT_URL.includes("PASTE_YOUR")
+        ){
+
+            reject(
+                new Error(
+                    "Apps Script URL is missing."
+                )
+            );
+
+            return;
+
+        }
+
+
+        const callbackName =
+            "apiCallback_" +
+            Date.now() +
+            "_" +
+            Math.random()
+                .toString(36)
+                .substring(2);
+
+
+        const query =
+            new URLSearchParams();
+
+
+        query.set(
+            "action",
+            action
+        );
+
+
+        Object.keys(params).forEach(
+            function(key){
+
+                query.set(
+                    key,
+                    params[key]
+                );
+
+            }
+        );
+
+
+        query.set(
+            "callback",
+            callbackName
+        );
+
+
+        const script =
+            document.createElement("script");
+
+
+        let finished = false;
+
+
+        const timeout =
+            setTimeout(function(){
+
+                if(finished) return;
+
+                finished = true;
+
+                cleanup();
+
+                reject(
+                    new Error(
+                        "Request timed out."
+                    )
+                );
+
+            },15000);
+
+
+        function cleanup(){
+
+            clearTimeout(timeout);
+
+            if(script.parentNode){
+
+                script.parentNode.removeChild(script);
+
+            }
+
+            try{
+
+                delete window[callbackName];
+
+            }
+            catch(e){}
+
+        }
+
+
+        window[callbackName] =
+            function(response){
+
+                if(finished) return;
+
+                finished = true;
+
+                cleanup();
+
+                resolve(response);
+
+            };
+
+
+        script.onerror =
+            function(){
+
+                if(finished) return;
+
+                finished = true;
+
+                cleanup();
+
+                reject(
+                    new Error(
+                        "Unable to connect to Google Apps Script."
+                    )
+                );
+
+            };
+
+
+        script.src =
+            APPS_SCRIPT_URL +
+            "?" +
+            query.toString();
+
+
+        document
+            .body
+            .appendChild(script);
+
+    });
+
+}
+
+
+/* ==================================================
+REGISTER ACCOUNT
+================================================== */
+
+async function registerAccount(){
+
+    const username =
+        document
+            .getElementById("newUsername")
+            .value
+            .trim();
+
+
+    const password =
+        document
+            .getElementById("newPassword")
+            .value;
+
+
+    const confirm =
+        document
+            .getElementById("confirmPassword")
+            .value;
+
+
+    if(
+        !username ||
+        !password ||
+        !confirm
+    ){
+
+        showMessage(
+            "❌ Please complete all fields."
+        );
+
+        return;
+
+    }
+
+
+    if(password.length < 4){
+
+        showMessage(
+            "❌ Password must be at least 4 characters."
+        );
+
+        return;
+
+    }
+
+
+    if(password !== confirm){
+
+        showMessage(
+            "❌ Passwords do not match."
+        );
+
+        return;
+
+    }
+
+
+    try{
+
+        showMessage(
+            "⏳ Creating account..."
+        );
+
+
+        const result =
+            await api(
+                "register",
+                {
+                    username:username,
+                    password:password
+                }
+            );
+
+
+        if(result.success){
+
+            showMessage(
+                "✅ Account created! Wait for Admin approval."
+            );
+
+
+            document
+                .getElementById("newUsername")
+                .value = "";
+
+
+            document
+                .getElementById("newPassword")
+                .value = "";
+
+
+            document
+                .getElementById("confirmPassword")
+                .value = "";
+
+        }
+        else{
+
+            showMessage(
+                "❌ " +
+                (result.message || "Registration failed.")
+            );
+
+        }
+
+    }
+    catch(error){
+
+        console.error(error);
+
+        showMessage(
+            "❌ Cannot connect to Google Apps Script."
+        );
+
+    }
+
+}
+
+
+/* ==================================================
+LOGIN
+================================================== */
+
+async function login(){
+
+    const username =
+        document
+            .getElementById("username")
+            .value
+            .trim();
+
+
+    const password =
+        document
+            .getElementById("password")
+            .value;
+
+
+    if(
+        !username ||
+        !password
+    ){
+
+        showMessage(
+            "❌ Enter username and password."
+        );
+
+        return;
+
+    }
+
+
+    try{
+
+        showMessage(
+            "⏳ Checking account..."
+        );
+
+
+        const result =
+            await api(
+                "login",
+                {
+                    username:username,
+                    password:password
+                }
+            );
+
+
+        if(
+            !result ||
+            !result.success
+        ){
+
+            showMessage(
+                "❌ " +
+                (
+                    result &&
+                    result.message
+                    ?
+                    result.message
+                    :
+                    "Invalid login."
+                )
+            );
+
+            return;
+
+        }
+
+
+        currentUser = {
+
+            username:result.username,
+
+            role:result.role
+
+        };
+
+
+        document
+            .getElementById("loginPage")
+            .style.display = "none";
+
+
+        document
+            .getElementById("system")
+            .style.display = "block";
+
+
+        document
+            .getElementById("userDisplay")
+            .innerHTML =
+
+            escapeHTML(
+                result.username
+            ) +
+
+            " • " +
+
+            escapeHTML(
+                result.role
+            );
+
+
+        if(result.role === "Admin"){
+
+            document
+                .getElementById("adminPanel")
+                .style.display = "block";
+
+
+            document
+                .getElementById("studentSection")
+                .style.display = "block";
+
+
+            loadPendingUsers();
+
+        }
+        else{
+
+            document
+                .getElementById("adminPanel")
+                .style.display = "none";
+
+
+            document
+                .getElementById("studentSection")
+                .style.display = "none";
+
+        }
+
+
+        displayStudents();
+
+        displayAttendance();
+
+        updateDashboard();
+
+    }
+    catch(error){
+
+        console.error(error);
+
+        showMessage(
+            "❌ Cannot connect to Google Apps Script."
+        );
+
+    }
+
+}
+
+
+/* ==================================================
+REGISTER STUDENT
+================================================== */
+
+async function registerStudent(){
+
+    if(
+        !currentUser ||
+        currentUser.role !== "Admin"
+    ){
+
+        alert(
+            "Only Admin can register students."
+        );
+
+        return;
+
+    }
+
+
+    const id =
+        document
+            .getElementById("studentID")
+            .value
+            .trim();
+
+
+    const name =
+        document
+            .getElementById("studentName")
+            .value
+            .trim();
+
+
+    if(!id || !name){
+
+        document
+            .getElementById("studentMessage")
+            .innerHTML =
+            "❌ Enter Student ID and Name.";
+
+        return;
+
+    }
+
+
+    if(
+        students.some(
+            function(student){
+
+                return student.id.toLowerCase() ===
+                    id.toLowerCase();
+
+            }
+        )
+    ){
+
+        document
+            .getElementById("studentMessage")
+            .innerHTML =
+            "⚠️ Student already exists.";
+
+        return;
+
+    }
+
+
+    const student = {
+
+        id:id,
+
+        name:name,
+
+        qr:id
+
+    };
+
+
+    students.push(student);
+
+
+    localStorage.setItem(
+        "students",
+        JSON.stringify(students)
+    );
+
+
+    try{
+
+        const result =
+            await api(
+                "student",
+                {
+                    id:id,
+                    name:name,
+                    qr:id
+                }
+            );
+
+
+        if(result && result.success){
+
+            document
+                .getElementById("studentMessage")
+                .innerHTML =
+                "✅ Student registered and QR generated!";
+
+        }
+        else{
+
+            document
+                .getElementById("studentMessage")
+                .innerHTML =
+                "⚠️ Student saved locally. Online save failed.";
+
+        }
+
+    }
+    catch(error){
+
+        console.error(error);
+
+        document
+            .getElementById("studentMessage")
+            .innerHTML =
+            "⚠️ Student saved locally. Online save failed.";
+
+    }
+
+
+    displayStudents();
+
+    updateDashboard();
+
+
+    document
+        .getElementById("studentID")
+        .value = "";
+
+
+    document
+        .getElementById("studentName")
+        .value = "";
+
+}
+
+
+/* ==================================================
+CREATE QR
+================================================== */
+
+function createQR(student){
+
+    const card =
+        document.createElement("div");
+
+
+    card.className = "student";
+
+
+    const qrID =
+        "qr_" +
+        Date.now() +
+        "_" +
+        Math.random()
+            .toString(36)
+            .substring(2);
+
+
+    card.innerHTML = `
+
+        <h3>
+            ${escapeHTML(student.name)}
+        </h3>
+
+        <p>
+            Student ID:
+            <b>
+                ${escapeHTML(student.id)}
+            </b>
+        </p>
+
+        <div
+            class="qr"
+            id="${qrID}">
+        </div>
+
+        <p>
+            📱 Scan Me
+        </p>
+
+    `;
+
+
+    document
+        .getElementById("studentQR")
+        .appendChild(card);
+
+
+    new QRCode(
+
+        document.getElementById(qrID),
+
+        {
+            text:student.id,
+            width:170,
+            height:170,
+            correctLevel:
+                QRCode.CorrectLevel.H
+        }
+
+    );
+
+}
+
+
+/* ==================================================
+DISPLAY STUDENTS
+================================================== */
+
+function displayStudents(){
+
+    const container =
+        document
+            .getElementById("studentQR");
+
+
+    container.innerHTML = "";
+
+
+    students.forEach(
+        function(student){
+
+            createQR(student);
+
+        }
+    );
+
+}
+
+
+/* ==================================================
+START SCANNER
+================================================== */
+
+function startScanner(){
+
+    if(scanning){
+
+        return;
+
+    }
+
+
+    if(
+        typeof Html5Qrcode ===
+        "undefined"
+    ){
+
+        document
+            .getElementById("scannerStatus")
+            .innerHTML =
+            "❌ Scanner library did not load.";
+
+        return;
+
+    }
+
+
+    scanner =
+        new Html5Qrcode("reader");
+
+
+    scanLocked = false;
+
+
+    scanner.start(
+
+        {
+            facingMode:"environment"
+        },
+
+        {
+            fps:10,
+
+            qrbox:{
+                width:250,
+                height:250
+            }
+
+        },
+
+        function(decodedText){
+
+            if(scanLocked){
+
+                return;
+
+            }
+
+
+            scanLocked = true;
+
+
+            document
+                .getElementById("reader")
+                .classList
+                .add("detected");
+
+
+            document
+                .getElementById("scannerStatus")
+                .innerHTML =
+                "🟢 QR CODE DETECTED!";
+
+
+            processAttendance(
+                decodedText.trim()
+            );
+
+        },
+
+        function(error){
+
+            /* Normal scanning errors ignored */
+
+        }
+
+    )
+
+    .then(function(){
+
+        scanning = true;
+
+
+        document
+            .getElementById("scannerStatus")
+            .innerHTML =
+            "📷 Scanner active. Point camera at QR code.";
+
+    })
+
+    .catch(function(error){
+
+        console.error(error);
+
+
+        document
+            .getElementById("scannerStatus")
+            .innerHTML =
+            "❌ Camera permission required. Please allow camera access.";
+
+        scanLocked = false;
+
+    });
+
+}
+
+
+/* ==================================================
+STOP SCANNER
+================================================== */
+
+function stopScanner(){
+
+    if(scanner && scanning){
+
+        scanner.stop()
+
+        .then(function(){
+
+            scanner.clear();
+
+            scanner = null;
+
+            scanning = false;
+
+        })
+
+        .catch(function(error){
+
+            console.log(error);
+
+        });
+
+    }
+
+
+    document
+        .getElementById("reader")
+        .classList
+        .remove("detected");
+
+
+    document
+        .getElementById("scannerStatus")
+        .innerHTML =
+        "Scanner stopped.";
+
+
+    scanLocked = false;
+
+}
+
+
+/* ==================================================
+PROCESS ATTENDANCE
+================================================== */
+
+async function processAttendance(studentID){
+
+    const student =
+        students.find(
+            function(s){
+
+                return s.id.toLowerCase() ===
+                    studentID.toLowerCase();
+
+            }
+        );
+
+
+    if(!student){
+
+        document
+            .getElementById("scannerStatus")
+            .innerHTML =
+            "❌ Student is not registered.";
+
+        scanLocked = false;
+
+        return;
+
+    }
+
+
+    const event =
+        document
+            .getElementById("eventName")
+            .value
+            .trim();
+
+
+    if(!event){
+
+        alert(
+            "Please enter the event name first."
+        );
+
+        scanLocked = false;
+
+        return;
+
+    }
+
+
+    /* DUPLICATE CHECK */
+
+    const duplicate =
+        attendance.some(
+            function(record){
+
+                return (
+
+                    record.id === student.id &&
+
+                    String(record.event)
+                        .toLowerCase() ===
+                    event.toLowerCase()
+
+                );
+
+            }
+        );
+
+
+    if(duplicate){
+
+        document
+            .getElementById("scannerStatus")
+            .innerHTML =
+            "⚠️ Student already recorded.";
+
+        scanLocked = false;
+
+        return;
+
+    }
+
+
+    const now =
+        new Date();
+
+
+    const record = {
+
+        id:student.id,
+
+        name:student.name,
+
+        event:event,
+
+        date:
+            now.toLocaleDateString(),
+
+        time:
+            now.toLocaleTimeString(),
+
+        status:"Present",
+
+        scannedBy:
+            currentUser
+            ?
+            currentUser.username
+            :
+            "Staff"
+
+    };
+
+
+    /* ==================================================
+       SAVE LOCAL
+    ================================================== */
+
+    attendance.push(record);
+
+
+    localStorage.setItem(
+        "attendance",
+        JSON.stringify(attendance)
+    );
+
+
+    displayAttendance();
+
+    updateDashboard();
+
+
+    /* ==================================================
+       SAVE TO GOOGLE SHEETS
+    ================================================== */
+
+    try{
+
+        const result =
+            await api(
+
+                "attendance",
+
+                {
+
+                    id:record.id,
+
+                    name:record.name,
+
+                    event:record.event,
+
+                    date:record.date,
+
+                    time:record.time,
+
+                    status:record.status,
+
+                    scannedBy:record.scannedBy
+
+                }
+
+            );
+
+
+        if(
+            result &&
+            result.success
+        ){
+
+            document
+                .getElementById("scannerStatus")
+                .innerHTML =
+                "✅ Attendance saved to Google Sheets!";
+
+        }
+        else{
+
+            document
+                .getElementById("scannerStatus")
+                .innerHTML =
+                "⚠️ Saved locally, but Google Sheets returned an error.";
+
+        }
+
+    }
+    catch(error){
+
+        console.error(error);
+
+        document
+            .getElementById("scannerStatus")
+            .innerHTML =
+            "⚠️ Saved locally. Google Sheets connection failed.";
+
+    }
+
+
+    /* SUCCESS POPUP */
+
+    showSuccess(
+        student,
+        record
+    );
+
+
+    /* STOP SCANNER */
+
+    setTimeout(
+        function(){
+
+            stopScanner();
+
+        },
+        1000
+    );
+
+}
+
+
+/* ==================================================
+SUCCESS POPUP
+================================================== */
+
+function showSuccess(student,record){
+
+    document
+        .getElementById("successName")
+        .innerHTML =
+        escapeHTML(
+            student.name
+        );
+
+
+    document
+        .getElementById("successDetails")
+        .innerHTML =
+
+        "Student ID: <b>" +
+        escapeHTML(student.id) +
+        "</b><br><br>" +
+
+        "Event: " +
+        escapeHTML(record.event) +
+
+        "<br>" +
+
+        "Date: " +
+        escapeHTML(record.date) +
+
+        "<br>" +
+
+        "Time: " +
+        escapeHTML(record.time);
+
+
+    document
+        .getElementById("popup")
+        .style.display =
+        "flex";
+
+}
+
+
+function closePopup(){
+
+    document
+        .getElementById("popup")
+        .style.display =
+        "none";
+
+
+    document
+        .getElementById("scannerStatus")
+        .innerHTML =
+        "Ready for next scan.";
+
+
+    document
+        .getElementById("reader")
+        .classList
+        .remove("detected");
+
+
+    scanLocked = false;
+
+}
+
+
+/* ==================================================
+ATTENDANCE TABLE
+================================================== */
+
+function displayAttendance(){
+
+    const table =
+        document
+            .getElementById("attendanceTable");
+
+
+    const search =
+        document
+            .getElementById("search")
+            .value
+            .toLowerCase();
+
+
+    table.innerHTML = "";
+
+
+    const filtered =
+        attendance.filter(
+            function(record){
+
+                return (
+
+                    String(record.id)
+                        .toLowerCase()
+                        .includes(search)
+
+                    ||
+
+                    String(record.name)
+                        .toLowerCase()
+                        .includes(search)
+
+                    ||
+
+                    String(record.event)
+                        .toLowerCase()
+                        .includes(search)
+
+                );
+
+            }
+        );
+
+
+    if(filtered.length === 0){
+
+        table.innerHTML = `
+
+            <tr>
+
+                <td
+                    colspan="7"
+                    style="text-align:center">
+
+                    No attendance records.
+
+                </td>
+
+            </tr>
+
+        `;
+
+        return;
+
+    }
+
+
+    filtered
+        .slice()
+        .reverse()
+        .forEach(
+            function(record){
+
+                const row =
+                    document.createElement("tr");
+
+
+                row.innerHTML = `
+
+                    <td>
+                        ${escapeHTML(record.id)}
+                    </td>
+
+                    <td>
+                        ${escapeHTML(record.name)}
+                    </td>
+
+                    <td>
+                        ${escapeHTML(record.event)}
+                    </td>
+
+                    <td>
+                        ${escapeHTML(record.date)}
+                    </td>
+
+                    <td>
+                        ${escapeHTML(record.time)}
+                    </td>
+
+                    <td
+                        style="color:#28a745;font-weight:bold">
+
+                        ✓ Present
+
+                    </td>
+
+                    <td>
+                        ${escapeHTML(record.scannedBy || "Staff")}
+                    </td>
+
+                `;
+
+
+                table.appendChild(row);
+
+            }
+        );
+
+}
+
+
+/* ==================================================
+ADMIN: LOAD PENDING USERS
+================================================== */
+
+async function loadPendingUsers(){
+
+    const container =
+        document
+            .getElementById("pendingUsers");
+
+
+    container.innerHTML =
+        "⏳ Loading accounts...";
+
+
+    try{
+
+        const result =
+            await api("pending");
+
+
+        container.innerHTML = "";
+
+
+        if(
+            !result ||
+            !result.users ||
+            result.users.length === 0
+        ){
+
+            container.innerHTML =
+                "✅ No pending accounts.";
+
+            return;
+
+        }
+
+
+        result.users.forEach(
+            function(user){
+
+                const div =
+                    document.createElement("div");
+
+
+                div.className =
+                    "pendingUser";
+
+
+                const username =
+                    String(user.username);
+
+
+                div.innerHTML = `
+
+                    <b>
+                        👤 ${escapeHTML(username)}
+                    </b>
+
+                    <br>
+
+                    Status:
+
+                    <span style="color:#d9534f">
+                        Pending
+                    </span>
+
+                    <br><br>
+
+                    <button
+                        class="red"
+                        onclick="approveUser('${encodeURIComponent(username)}')">
+
+                        ✓ Give Permission
+
+                    </button>
+
+                `;
+
+
+                container.appendChild(div);
+
+            }
+        );
+
+    }
+    catch(error){
+
+        console.error(error);
+
+        container.innerHTML =
+            "❌ Unable to load accounts.";
+
+    }
+
+}
+
+
+/* ==================================================
+ADMIN: APPROVE USER
+================================================== */
+
+async function approveUser(encodedUsername){
+
+    if(
+        !currentUser ||
+        currentUser.role !== "Admin"
+    ){
+
+        alert(
+            "Admin permission required."
+        );
+
+        return;
+
+    }
+
+
+    const username =
+        decodeURIComponent(
+            encodedUsername
+        );
+
+
+    if(
+        !confirm(
+            "Give permission to " +
+            username +
+            "?"
+        )
+    ){
+
+        return;
+
+    }
+
+
+    try{
+
+        const result =
+            await api(
+                "approve",
+                {
+                    username:username
+                }
+            );
+
+
+        alert(
+            result.message ||
+            "Account updated."
+        );
+
+
+        loadPendingUsers();
+
+    }
+    catch(error){
+
+        console.error(error);
+
+        alert(
+            "❌ Unable to approve account."
+        );
+
+    }
+
+}
+
+
+/* ==================================================
+DASHBOARD
+================================================== */
+
+function updateDashboard(){
+
+    document
+        .getElementById("studentCount")
+        .innerHTML =
+        students.length;
+
+
+    document
+        .getElementById("attendanceCount")
+        .innerHTML =
+        attendance.length;
+
+}
+
+
+/* ==================================================
+LOGOUT
+================================================== */
+
+function logout(){
+
+    stopScanner();
+
+
+    currentUser = null;
+
+
+    document
+        .getElementById("system")
+        .style.display =
+        "none";
+
+
+    document
+        .getElementById("loginPage")
+        .style.display =
+        "flex";
+
+
+    document
+        .getElementById("username")
+        .value = "";
+
+
+    document
+        .getElementById("password")
+        .value = "";
+
+
+    showLogin();
+
+}
+
+
+/* ==================================================
+INITIALIZE
+================================================== */
+
+displayStudents();
+
+displayAttendance();
 
 updateDashboard();
 
 </script>
 
 </body>
-
 </html>
