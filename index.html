@@ -1039,7 +1039,592 @@ GOOGLE APPS SCRIPT URL
 const APPS_SCRIPT_URL =
 "https://script.google.com/macros/s/AKfycbxg6uuv7fPItn6XvNvCLZ3tbAf0rxRfootS2c-n6pa5YUkB6tsZsnFS_dHrZgysdjeDpg/exec";
 
+/* STUDENTS */
+const students = [
+  {id:"STU001", name:"Juan Dela Cruz"},
+  {id:"STU002", name:"Maria Santos"},
+  {id:"STU003", name:"Pedro Reyes"},
+  {id:"STU004", name:"Ana Garcia"},
+  {id:"STU005", name:"Mark Lopez"},
+  {id:"STU006", name:"Sofia Ramos"}
+];
 
+
+let scanner = null;
+let running = false;
+let lastId = "";
+let lastTime = 0;
+
+
+/* =========================
+   GENERATE QR CODES
+========================= */
+
+function generateQR(){
+
+  const box = document.getElementById("qrs");
+
+  box.innerHTML = "";
+
+  students.forEach(student => {
+
+    const card = document.createElement("div");
+
+    card.className = "student";
+
+    card.innerHTML = `
+      <b>${safe(student.name)}</b><br>
+      ID: ${safe(student.id)}
+
+      <div
+        class="qr"
+        id="qr_${student.id}">
+      </div>
+
+      <small>Scan for attendance</small>
+    `;
+
+    box.appendChild(card);
+
+    new QRCode(
+      document.getElementById("qr_" + student.id),
+      {
+        text: student.id,
+        width: 150,
+        height: 150
+      }
+    );
+
+  });
+
+}
+
+
+/* =========================
+   START SCANNER
+========================= */
+
+function startScanner(){
+
+  if(running) return;
+
+  scanner = new Html5Qrcode("reader");
+
+  scanner.start(
+
+    {facingMode:"environment"},
+
+    {
+      fps:10,
+      qrbox:{
+        width:250,
+        height:250
+      }
+    },
+
+    text => processScan(text),
+
+    () => {}
+
+  )
+  .then(() => {
+
+    running = true;
+
+    setStatus(
+      "📷 Camera started. Scan a QR code.",
+      ""
+    );
+
+  })
+
+  .catch(error => {
+
+    console.error(error);
+
+    setStatus(
+      "❌ Camera failed. Allow camera permission and use HTTPS.",
+      "error"
+    );
+
+  });
+
+}
+
+
+/* =========================
+   STOP SCANNER
+========================= */
+
+function stopScanner(){
+
+  if(scanner && running){
+
+    scanner.stop()
+      .then(() => {
+
+        scanner.clear();
+
+        running = false;
+
+        setStatus(
+          "Scanner stopped.",
+          ""
+        );
+
+      })
+      .catch(error => {
+
+        console.error(error);
+
+      });
+
+  }
+
+}
+
+
+/* =========================
+   PROCESS QR SCAN
+========================= */
+
+function processScan(raw){
+
+  const id = raw.trim();
+
+  const now = Date.now();
+
+
+  /* Prevent repeated scans */
+  if(
+    id === lastId &&
+    now - lastTime < 5000
+  ){
+
+    return;
+
+  }
+
+
+  lastId = id;
+  lastTime = now;
+
+
+  /* Find student */
+  const student =
+    students.find(
+      s => s.id === id
+    );
+
+
+  if(!student){
+
+    setStatus(
+      "❌ Unregistered Student ID: " + id,
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  /* Get event */
+  const event =
+    document
+      .getElementById("event")
+      .value
+      .trim();
+
+
+  if(!event){
+
+    setStatus(
+      "❌ Enter the active event first.",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  /* Current date and time */
+  const d = new Date();
+
+
+  const record = {
+
+    id: student.id,
+
+    name: student.name,
+
+    event: event,
+
+    date:
+      d.toLocaleDateString("en-US"),
+
+    time:
+      d.toLocaleTimeString(
+        "en-US",
+        {
+          hour:"numeric",
+          minute:"2-digit"
+        }
+      ),
+
+    status:"Present",
+
+    scannedBy:"Staff"
+
+  };
+
+
+  /* Save locally first */
+  if(!saveLocal(record)){
+
+    return;
+
+  }
+
+
+  /* SEND TO GOOGLE SHEETS */
+  sendAttendanceToGoogle(record);
+
+
+  /* SUCCESS */
+  showScanSuccess(student);
+
+}
+
+
+/* =========================
+   LOCAL STORAGE
+========================= */
+
+function saveLocal(record){
+
+  const list =
+    JSON.parse(
+      localStorage.getItem("attendance") || "[]"
+    );
+
+
+  /* Duplicate check */
+
+  if(
+    list.some(
+      x =>
+        x.id === record.id &&
+        x.event.toLowerCase() ===
+        record.event.toLowerCase()
+    )
+  ){
+
+    setStatus(
+      "⚠️ Already recorded for this event.",
+      "error"
+    );
+
+    return false;
+
+  }
+
+
+  list.push(record);
+
+  localStorage.setItem(
+    "attendance",
+    JSON.stringify(list)
+  );
+
+
+  renderRows();
+
+  return true;
+
+}
+
+
+/* =========================
+   SEND ATTENDANCE TO GOOGLE
+========================= */
+
+function sendAttendanceToGoogle(data){
+
+  if(
+    !APPS_SCRIPT_URL ||
+    APPS_SCRIPT_URL.includes("PASTE_YOUR")
+  ){
+
+    setStatus(
+      "✓ Saved locally. Apps Script URL is missing.",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  const url =
+    APPS_SCRIPT_URL +
+
+    "?action=attendance" +
+
+    "&id=" +
+    encodeURIComponent(data.id) +
+
+    "&name=" +
+    encodeURIComponent(data.name) +
+
+    "&event=" +
+    encodeURIComponent(data.event) +
+
+    "&date=" +
+    encodeURIComponent(data.date) +
+
+    "&time=" +
+    encodeURIComponent(data.time) +
+
+    "&status=" +
+    encodeURIComponent(data.status) +
+
+    "&scannedBy=" +
+    encodeURIComponent(data.scannedBy || "") +
+
+    "&callback=attendanceCallback";
+
+
+  /*
+    JSONP request.
+
+    This works even when your HTML
+    is hosted on another website.
+  */
+
+  const script =
+    document.createElement("script");
+
+
+  script.src = url;
+
+
+  script.onerror = function(){
+
+    setStatus(
+      "⚠️ Saved locally, but Google Sheets could not be reached.",
+      "error"
+    );
+
+  };
+
+
+  document.body.appendChild(script);
+
+
+  /*
+    Remove script after a few seconds.
+  */
+
+  setTimeout(() => {
+
+    if(script.parentNode){
+
+      script.parentNode.removeChild(script);
+
+    }
+
+  }, 10000);
+
+}
+
+
+/* =========================
+   GOOGLE RESPONSE
+========================= */
+
+function attendanceCallback(response){
+
+  console.log(
+    "Apps Script response:",
+    response
+  );
+
+
+  if(response && response.success){
+
+    setStatus(
+      "✓ " +
+      response.message,
+      "success"
+    );
+
+  }
+
+  else{
+
+    setStatus(
+      "⚠️ Google Sheets error: " +
+      (response.message || "Unknown error"),
+      "error"
+    );
+
+  }
+
+}
+
+
+/* =========================
+   SUCCESS DISPLAY
+========================= */
+
+function showScanSuccess(student){
+
+  setStatus(
+    "✅ " +
+    student.name +
+    " marked PRESENT!",
+    "success"
+  );
+
+
+  /*
+    Optional visual effect
+    on scanner area.
+  */
+
+  const reader =
+    document.getElementById("reader");
+
+
+  reader.style.border =
+    "5px solid #28a745";
+
+
+  reader.style.borderRadius =
+    "15px";
+
+
+  setTimeout(() => {
+
+    reader.style.border =
+      "";
+
+  }, 1500);
+
+}
+
+
+/* =========================
+   DISPLAY LOCAL RECORDS
+========================= */
+
+function renderRows(){
+
+  const list =
+    JSON.parse(
+      localStorage.getItem("attendance") || "[]"
+    );
+
+
+  document.getElementById("rows").innerHTML =
+
+    list.map(record => `
+
+      <tr>
+
+        <td>
+          ${safe(record.id)}
+        </td>
+
+        <td>
+          ${safe(record.name)}
+        </td>
+
+        <td>
+          ${safe(record.event)}
+        </td>
+
+        <td>
+          ${safe(record.date)}
+        </td>
+
+        <td>
+          ${safe(record.time)}
+        </td>
+
+        <td>
+          ${safe(record.status)}
+        </td>
+
+      </tr>
+
+    `).join("");
+
+}
+
+
+/* =========================
+   STATUS MESSAGE
+========================= */
+
+function setStatus(text, className){
+
+  const element =
+    document.getElementById("status");
+
+
+  element.textContent = text;
+
+
+  element.className =
+    "status " + className;
+
+}
+
+
+/* =========================
+   SECURITY / HTML SAFE
+========================= */
+
+function safe(value){
+
+  return String(value).replace(
+    /[&<>"']/g,
+
+    function(match){
+
+      return {
+
+        "&":"&amp;",
+
+        "<":"&lt;",
+
+        ">":"&gt;",
+
+        '"':"&quot;",
+
+        "'":"&#039;"
+
+      }[match];
+
+    }
+
+  );
+
+}
+
+
+/* =========================
+   INITIALIZE
+========================= */
+
+generateQR();
+
+renderRows();
+
+</script>
 
 /* ==================================================
 LOCAL CACHE
